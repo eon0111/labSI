@@ -13,16 +13,51 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="32dp"
         android:text="CENTRO JUVENIL"
-        app:layout_constraintBottom_toTopOf="@+id/cuadroTexto"
+        android:textSize="10pt"
+        android:textStyle="bold"
+
+        app:layout_constraintBottom_toTopOf="@+id/tituloListadoSensores"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tituloListadoSensores"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:text="Listado de sensores:"
+        android:textSize="8pt"
+        android:textStyle="bold"
+
+        app:layout_constraintTop_toBottomOf="@id/tituloMainActivity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/scrollViewSensores"/>
+
+    <ScrollView
+        android:id="@+id/scrollViewSensores"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+
+        app:layout_constraintTop_toBottomOf="@id/tituloListadoSensores"
+        app:layout_constraintBottom_toTopOf="@id/botonMonitorizarCaidas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/cuadroTexto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars = "vertical" />
+    </ScrollView>
 
     <Button
         android:id="@+id/botonMonitorizarCaidas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Monitorizar caídas"
+        android:text="Monitorizar Caídas"
+
+        app:layout_constraintTop_toBottomOf="@id/scrollViewSensores"
         app:layout_constraintBottom_toTopOf="@+id/botonMonitorizarPanel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -31,18 +66,11 @@
         android:id="@+id/botonMonitorizarPanel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="400dp"
         android:text="Monitorizar Panel"
+
+        app:layout_constraintTop_toBottomOf="@id/botonMonitorizarCaidas"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/cuadroTexto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Listado de sensores"
-        app:layout_constraintBottom_toTopOf="@+id/botonMonitorizarCaidas"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
