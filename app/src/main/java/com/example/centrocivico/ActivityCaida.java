@@ -18,6 +18,7 @@ public class ActivityCaida extends AppCompatActivity implements SensorEventListe
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_caidas);
 
 		SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 		Sensor acelerometro = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);

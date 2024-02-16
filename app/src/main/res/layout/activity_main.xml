@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:onClick="botonCaidas"
     tools:context=".MainActivity">
 
     <TextView
@@ -29,48 +30,50 @@
         android:textSize="8pt"
         android:textStyle="bold"
 
-        app:layout_constraintTop_toBottomOf="@id/tituloMainActivity"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/scrollViewSensores"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/scrollViewSensores"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tituloMainActivity" />
 
     <ScrollView
         android:id="@+id/scrollViewSensores"
         android:layout_width="350dp"
         android:layout_height="200dp"
 
-        app:layout_constraintTop_toBottomOf="@id/tituloListadoSensores"
         app:layout_constraintBottom_toTopOf="@id/botonMonitorizarCaidas"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tituloListadoSensores">
 
         <TextView
             android:id="@+id/cuadroTexto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars = "vertical" />
+            android:scrollbars="vertical" />
     </ScrollView>
 
     <Button
         android:id="@+id/botonMonitorizarCaidas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="botonCaidas"
         android:text="Monitorizar Caídas"
 
-        app:layout_constraintTop_toBottomOf="@id/scrollViewSensores"
         app:layout_constraintBottom_toTopOf="@+id/botonMonitorizarPanel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollViewSensores" />
 
     <Button
         android:id="@+id/botonMonitorizarPanel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Monitorizar Panel"
+        android:onClick="botonPanel"
 
-        app:layout_constraintTop_toBottomOf="@id/botonMonitorizarCaidas"
+        android:text="Monitorizar Panel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/botonMonitorizarCaidas" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

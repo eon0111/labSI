@@ -8,6 +8,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class ActivityPanel extends AppCompatActivity implements SensorEventListe
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		setContentView(R.layout.activity_panel);
 		SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 		Sensor sensorProximidad = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
 
@@ -28,6 +29,7 @@ public class ActivityPanel extends AppCompatActivity implements SensorEventListe
 
 	@Override
 	public void onSensorChanged(SensorEvent event) {
+		Toast.makeText(this, "TODO "+event.values[0], Toast.LENGTH_LONG).show();
 		if(event.values[0] == 0) {
 			visualiza("cerca");
 		} else{

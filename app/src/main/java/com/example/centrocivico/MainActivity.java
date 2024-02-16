@@ -2,6 +2,7 @@ package com.example.centrocivico;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -13,22 +14,12 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener { //, SensorEventListener {
-
-	/* Botones */
-	private Button botonMonitorizarCaidas;
-	private Button botonMonitorizarPanel;
+public class MainActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		botonMonitorizarCaidas = (Button) findViewById(R.id.botonMonitorizarCaidas);
-		botonMonitorizarPanel = (Button) findViewById(R.id.botonMonitorizarPanel);
-
-		botonMonitorizarCaidas.setOnClickListener(this);
-		botonMonitorizarPanel.setOnClickListener(this);
 
 		SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 		List<Sensor> listaSensores = sensorManager.getSensorList(Sensor.TYPE_ALL);
@@ -38,13 +29,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		}
 	}
 
-	@Override
-	public void onClick(View v) {
-		if (v == botonMonitorizarPanel) {
-			setContentView(R.layout.activity_panel);
-		} else if (v == botonMonitorizarCaidas) {
-			setContentView(R.layout.activity_caidas);
-		}
+	public void botonCaidas(View v) {
+		Intent i = new Intent(this, ActivityCaida.class);
+		startActivity(i);
+	}
+
+	public void botonPanel(View v) {
+		Intent i = new Intent(this, ActivityPanel.class);
+		startActivity(i);
 	}
 
 	public void visualiza(String texto) {
