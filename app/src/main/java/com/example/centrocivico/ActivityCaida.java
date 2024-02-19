@@ -13,7 +13,7 @@ public class ActivityCaida extends AppCompatActivity implements SensorEventListe
 	private static final int ACCEL_DATA_X = 0;
 	private static final int ACCEL_DATA_Y = 1;
 	private static final int ACCEL_DATA_Z = 2;
-	private static final double ACCEL_TRIGGER = 1.5;	// TODO: hacer pruebas para configurar un buen valor umbral para la aceleración
+	private static final double ACCEL_TRIGGER = 20;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,9 @@ public class ActivityCaida extends AppCompatActivity implements SensorEventListe
 		float accel_y = event.values[ACCEL_DATA_Y];
 		float accel_z = event.values[ACCEL_DATA_Z];
 
-		texto_valor_sensor.setText("X: " + accel_x + "Y: " + accel_y + "Z: " + accel_z);
+		texto_valor_sensor.setText("X: " + String.format("%.3f", accel_x) +
+				  				   " Y: " + String.format("%.3f", accel_y) +
+								   " Z: " + String.format("%.3f", accel_z));
 
 		if (accel_x > ACCEL_TRIGGER || accel_y > ACCEL_TRIGGER ||accel_z > ACCEL_TRIGGER) {
 			texto_estado_usuario.setText("CAÍDA");

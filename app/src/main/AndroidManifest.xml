@@ -23,12 +23,10 @@
         </activity>
         <activity
             android:name=".ActivityCaida"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".ActivityPanel"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
     </application>
 
 </manifest>

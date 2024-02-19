@@ -29,7 +29,6 @@ public class ActivityPanel extends AppCompatActivity implements SensorEventListe
 
 	@Override
 	public void onSensorChanged(SensorEvent event) {
-		Toast.makeText(this, "TODO "+event.values[0], Toast.LENGTH_LONG).show();
 		if(event.values[0] == 0) {
 			visualiza("cerca");
 		} else{

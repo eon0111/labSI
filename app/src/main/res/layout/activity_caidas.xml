@@ -6,18 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tituloActivityCaidas"
-        android:layout_width="wrap_content"
+    <Toolbar
+        android:id="@+id/caidasBarraTitulo"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="32dp"
-        android:text="CENTRO JUVENIL"
-        android:textSize="10pt"
-        android:textStyle="bold"
+        android:background="@color/uc"
+        android:title="Centro Cívico"
 
         app:layout_constraintBottom_toTopOf="@+id/caidasTituloValorSensores"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,10 +24,10 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
 
-        app:layout_constraintTop_toTopOf="@+id/tituloActivityCaidas"
+        app:layout_constraintTop_toBottomOf="@+id/caidasBarraTitulo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/caidasValorSensores"
+        app:layout_constraintBottom_toTopOf="@+id/caidasValorSensores"
 
         android:text="Lecutras del acelerómetro:"
         android:textStyle="bold"
@@ -65,7 +63,7 @@
         android:layout_height="wrap_content"
 
         app:layout_constraintTop_toBottomOf="@id/caidasTituloEstadoUsuario"
-
-        />
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
