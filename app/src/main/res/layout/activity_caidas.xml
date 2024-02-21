@@ -65,5 +65,40 @@
         app:layout_constraintTop_toBottomOf="@id/caidasTituloEstadoUsuario"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/caidasTituloLocalizacion" />
+
+    <TextView
+        android:id="@+id/caidasTituloLocalizacion"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@+id/caidasEstadoUsuario"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/caidasLatitudUsuario"
+
+        android:text="Localización del usuario:"
+        android:textStyle="bold"
+        android:textSize="8pt" />
+
+    <TextView
+        android:id="@+id/caidasLatitudUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@id/caidasTituloLocalizacion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/caidasLongitudUsuario"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/caidasLongitudUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@id/caidasTituloLocalizacion"
+        app:layout_constraintStart_toEndOf="@+id/caidasLatitudUsuario"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
