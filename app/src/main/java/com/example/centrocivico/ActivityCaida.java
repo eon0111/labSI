@@ -16,14 +16,15 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ActivityCaida extends AppCompatActivity implements SensorEventListener, LocationListener {
 
@@ -94,7 +95,30 @@ public class ActivityCaida extends AppCompatActivity implements SensorEventListe
 		 */
 		crearCanalComunicacion();
 
+		// Initialize and assign variable
+		BottomNavigationView bottomNavigationView = findViewById(R.id.caidasBarraNavegacion);
 
+		// Set Home selected
+		bottomNavigationView.setSelectedItemId(R.id.activityCaidas);
+
+		bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+
+			@Override
+			public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+				if (item.getTitle().equals("Caídas")) {
+					return true;
+				} else if (item.getTitle().equals("Inicio")) {
+					startActivity(new Intent(getApplicationContext(), ActivityInicio.class));
+					//overridePendingTransition(0,0);
+					return true;
+				} else if (item.getTitle().equals("Panel")) {
+					startActivity(new Intent(getApplicationContext(), ActivityPanel.class));
+					//overridePendingTransition(0,0);
+					return true;
+				}
+				return false;
+			}
+		});
 	}
 
 	/**
@@ -107,16 +131,18 @@ public class ActivityCaida extends AppCompatActivity implements SensorEventListe
 	@SuppressLint({"SetTextI18n", "DefaultLocale"})
 	@Override
 	public void onSensorChanged(SensorEvent event) {
-		TextView texto_valor_sensor = (TextView) findViewById(R.id.caidasValorSensores);
+		TextView txt_val_accel_x = (TextView) findViewById(R.id.caidasValorSensorX);
+		TextView txt_val_accel_y = (TextView) findViewById(R.id.caidasValorSensorY);
+		TextView txt_val_accel_z = (TextView) findViewById(R.id.caidasValorSensorZ);
 		TextView texto_estado_usuario = (TextView) findViewById(R.id.caidasEstadoUsuario);
 
 		float accel_x = event.values[ACCEL_DATA_X];
 		float accel_y = event.values[ACCEL_DATA_Y];
 		float accel_z = event.values[ACCEL_DATA_Z];
 
-		texto_valor_sensor.setText("X: "  + String.format("%.3f", accel_x) +
-								   " Y: " + String.format("%.3f", accel_y) +
-								   " Z: " + String.format("%.3f", accel_z));
+		txt_val_accel_x.setText(String.format("%.3f", accel_x));
+		txt_val_accel_y.setText(String.format("%.3f", accel_y));
+		txt_val_accel_z.setText(String.format("%.3f", accel_z));
 
 		if (accel_x > ACCEL_TRIGGER || accel_y > ACCEL_TRIGGER || accel_z > ACCEL_TRIGGER) {
 			texto_estado_usuario.setText("CAÍDA");
@@ -133,8 +159,6 @@ public class ActivityCaida extends AppCompatActivity implements SensorEventListe
 	@SuppressLint("SetTextI18n")
 	@Override
 	public void onLocationChanged(@NonNull Location location) {
-		Toast.makeText(this, "Entra aquí", Toast.LENGTH_LONG).show();
-
 		TextView textoLatitud = findViewById(R.id.caidasLatitudUsuario);
 		TextView textoLongitud = findViewById(R.id.caidasLongitudUsuario);
 
@@ -165,7 +189,7 @@ public class ActivityCaida extends AppCompatActivity implements SensorEventListe
 	 *
 	 */
 	private void crearNotificacion() {
-		Intent intent = new Intent(this, MainActivity.class);
+		Intent intent = new Intent(this, ActivityInicio.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 

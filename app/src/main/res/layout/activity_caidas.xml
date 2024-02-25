@@ -4,69 +4,122 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ActivityCaida">
 
-    <Toolbar
-        android:id="@+id/caidasBarraTitulo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/uc"
-        android:title="Centro Cívico"
-
-        app:layout_constraintBottom_toTopOf="@+id/caidasTituloValorSensores"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+    <!-- LECTURAS DEL ACELEROMETRO -->
     <TextView
         android:id="@+id/caidasTituloValorSensores"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
 
-        app:layout_constraintTop_toBottomOf="@+id/caidasBarraTitulo"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/caidasValorSensores"
+        app:layout_constraintBottom_toTopOf="@+id/caidasContenedorLecturasAceleracion"
 
-        android:text="Lecutras del acelerómetro:"
+        android:text="Lecturas del acelerómetro:"
         android:textStyle="bold"
-        android:textSize="8pt" />
+        android:textSize="10pt" />
 
-    <TextView
-        android:id="@+id/caidasValorSensores"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/caidasContenedorLecturasAceleracion"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         app:layout_constraintTop_toBottomOf="@id/caidasTituloValorSensores"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/caidasTituloEstadoUsuario" />
+        app:layout_constraintBottom_toTopOf="@+id/caidasTituloEstadoUsuario">
 
+        <TextView
+            android:id="@+id/caidasValorSensorX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:paddingTop="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="10dp"
+
+            android:background="@drawable/recuadro_texto"
+            android:textSize="10pt"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/caidasValorSensorY"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/caidasValorSensorY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:paddingTop="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="10dp"
+
+            android:background="@drawable/recuadro_texto"
+            android:textSize="10pt"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/caidasValorSensorX"
+            app:layout_constraintEnd_toStartOf="@+id/caidasValorSensorZ"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/caidasValorSensorZ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:paddingTop="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="10dp"
+
+            android:background="@drawable/recuadro_texto"
+            android:textSize="10pt"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/caidasValorSensorY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- ESTADO DEL USUARIO -->
     <TextView
         android:id="@+id/caidasTituloEstadoUsuario"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
 
-        app:layout_constraintTop_toBottomOf="@+id/caidasValorSensores"
+        app:layout_constraintTop_toBottomOf="@+id/caidasContenedorLecturasAceleracion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/caidasEstadoUsuario"
 
         android:text="Estado del usuario:"
         android:textStyle="bold"
-        android:textSize="8pt" />
+        android:textSize="10pt" />
 
     <TextView
         android:id="@+id/caidasEstadoUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:paddingTop="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="10dp"
+
+        android:background="@drawable/recuadro_texto"
+        android:textSize="10pt"
+
         app:layout_constraintTop_toBottomOf="@id/caidasTituloEstadoUsuario"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/caidasTituloLocalizacion" />
 
+    <!-- LOCALIZACION DEL USUARIO -->
     <TextView
         android:id="@+id/caidasTituloLocalizacion"
         android:layout_width="350dp"
@@ -75,30 +128,68 @@
         app:layout_constraintTop_toBottomOf="@+id/caidasEstadoUsuario"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/caidasLatitudUsuario"
+        app:layout_constraintBottom_toTopOf="@+id/caidasContenedorLocalizacion"
 
         android:text="Localización del usuario:"
         android:textStyle="bold"
-        android:textSize="8pt" />
+        android:textSize="10pt" />
 
-    <TextView
-        android:id="@+id/caidasLatitudUsuario"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/caidasContenedorLocalizacion"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         app:layout_constraintTop_toBottomOf="@id/caidasTituloLocalizacion"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/caidasLongitudUsuario"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <TextView
-        android:id="@+id/caidasLongitudUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        app:layout_constraintTop_toBottomOf="@id/caidasTituloLocalizacion"
-        app:layout_constraintStart_toEndOf="@+id/caidasLatitudUsuario"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/caidasBarraNavegacion" >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/caidasLatitudUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:paddingTop="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="10dp"
+
+            android:background="@drawable/recuadro_texto"
+            android:textSize="10pt"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/caidasLongitudUsuario"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/caidasLongitudUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:paddingTop="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="10dp"
+
+            android:background="@drawable/recuadro_texto"
+            android:textSize="10pt"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/caidasLatitudUsuario"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/caidasBarraNavegacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_nav" />
+
+ </androidx.constraintlayout.widget.ConstraintLayout>
