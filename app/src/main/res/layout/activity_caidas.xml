@@ -32,6 +32,20 @@
         app:layout_constraintBottom_toTopOf="@+id/caidasTituloEstadoUsuario">
 
         <TextView
+            android:id="@+id/caidasTituloValorX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/caidasValorSensorX"
+
+            android:text=" X:"
+            android:textStyle="bold"
+            android:textSize="8pt" />
+
+        <TextView
             android:id="@+id/caidasValorSensorX"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,12 +56,26 @@
             android:paddingBottom="10dp"
 
             android:background="@drawable/recuadro_texto"
-            android:textSize="10pt"
+            android:textSize="8pt"
 
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/caidasValorSensorY"
+            app:layout_constraintStart_toEndOf="@id/caidasTituloValorX"
+            app:layout_constraintEnd_toStartOf="@+id/caidasTituloValorY"
             app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/caidasTituloValorY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/caidasValorSensorX"
+            app:layout_constraintEnd_toStartOf="@id/caidasValorSensorY"
+
+            android:text=" Y:"
+            android:textStyle="bold"
+            android:textSize="8pt" />
 
         <TextView
             android:id="@+id/caidasValorSensorY"
@@ -60,12 +88,26 @@
             android:paddingBottom="10dp"
 
             android:background="@drawable/recuadro_texto"
-            android:textSize="10pt"
+            android:textSize="8pt"
 
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@+id/caidasValorSensorX"
             app:layout_constraintEnd_toStartOf="@+id/caidasValorSensorZ"
             app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/caidasTituloValorZ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/caidasValorSensorY"
+            app:layout_constraintEnd_toStartOf="@id/caidasValorSensorZ"
+
+            android:text=" Z:"
+            android:textStyle="bold"
+            android:textSize="8pt" />
 
         <TextView
             android:id="@+id/caidasValorSensorZ"
@@ -78,10 +120,10 @@
             android:paddingBottom="10dp"
 
             android:background="@drawable/recuadro_texto"
-            android:textSize="10pt"
+            android:textSize="8pt"
 
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/caidasValorSensorY"
+            app:layout_constraintStart_toEndOf="@+id/caidasTituloValorZ"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

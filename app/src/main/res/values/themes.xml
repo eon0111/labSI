@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.CentroCivico" parent="Theme.AppCompat">
-        <!-- TODO -->
+        <item name="colorPrimary">@color/uc</item>
     </style>
 
     <style name="Theme.CentroCivico" parent="Base.Theme.CentroCivico" />

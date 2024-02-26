@@ -66,9 +66,12 @@ public class ActivityPanel extends AppCompatActivity implements SensorEventListe
 	 */
 	public void onSensorChanged(SensorEvent event) {
 		if(event.values[0] == 0) {
-			visualiza("cerca");
+			visualiza("Sala 1: juego libre Jugger\n" +
+					  "Sala 2: torneo de Mario Kart\n" +
+					  "Sala 3: clase de inglés\n" +
+					  "Sala 4: ensayo de coro juvenil");
 		} else{
-			visualiza("lejos");
+			visualiza("");
 		}
 	}
 
