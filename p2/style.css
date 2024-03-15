@@ -1,6 +1,8 @@
 .titulo-pagina {
     text-align: center;
     font-style: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color:darkcyan;
 }
 
 [data-bs-theme=black] {
