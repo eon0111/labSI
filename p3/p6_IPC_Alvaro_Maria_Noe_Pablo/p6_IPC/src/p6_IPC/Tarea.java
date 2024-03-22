@@ -6,17 +6,23 @@ public class Tarea {
 	private String identificador;
 	private String usuario; //usuario que realiza la tarea
 	private String enunciado; //lo que debe conseguir
-	private ArrayList<Interaccion> listaInteracciones;
+	private ArrayList<Interaccion> listaInteraccionesObjetivo;
+	private ArrayList<Interaccion> listaInteraccionesCompletadas;
 	
-	public Tarea(String identificador, String usuario, String enunciado, ArrayList<Interaccion> listaInteracciones) {
+	public Tarea(String identificador, String usuario, String enunciado) {
 		this.identificador = identificador;
 		this.usuario = usuario;
 		this.enunciado = enunciado;
-		this.listaInteracciones = listaInteracciones;
+		this.listaInteraccionesObjetivo = new ArrayList<Interaccion>();
+		this.listaInteraccionesCompletadas = new ArrayList<Interaccion>();
 	}
 	
-	public void anhadeInteraccion(Interaccion i) {
-		listaInteracciones.add(i);
+	public void anhadeObjetivo(Interaccion i) {
+		listaInteraccionesObjetivo.add(i);
+	}
+	
+	public void completaObjetivo(Interaccion i) {
+		listaInteraccionesCompletadas.add(i);
 	}
 
 	public String getIdentificador() {
@@ -43,11 +49,11 @@ public class Tarea {
 		this.enunciado = enunciado;
 	}
 
-	public ArrayList<Interaccion> getListaInteracciones() {
-		return listaInteracciones;
+	public ArrayList<Interaccion> getListaInteraccionesObjetivo() {
+		return listaInteraccionesObjetivo;
 	}
-
-	public void setListaInteracciones(ArrayList<Interaccion> listaInteracciones) {
-		this.listaInteracciones = listaInteracciones;
+	
+	public ArrayList<Interaccion> getListaInteraccionesCompletadas() {
+		return listaInteraccionesCompletadas;
 	}
 }

@@ -15,8 +15,6 @@ public class Interaccion {
 		this.tiempoMilisegundos = tiempoMilisegundos;
 	}
 	
-	
-
 	public String getIdentificador() {
 		return identificador;
 	}

@@ -42,7 +42,10 @@ import javax.swing.DefaultComboBoxModel;
 
 public class Editor implements ActionListener {
 	
-	private ArrayList<Tarea> listaTareas;
+	private Tarea tarea1;
+	private Tarea tarea2;
+	private Tarea tarea3;
+	private String nombreUsuario;
 
 	private JMenuItem mntmNuevo;
 	private JMenuItem mntmAbrir;
@@ -111,22 +114,26 @@ public class Editor implements ActionListener {
 	private JTextField textFieldReemplazar;
 
 	private ResourceBundle mensajes = null;
+	private JToolBar toolBar_1;
+	private JButton btnTarea1;
+	private JButton btnTarea2;
+	private JButton btnTarea3;
 	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Editor window = new Editor(idioma);
-					window.frmMicroissantW.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Editor window = new Editor(idioma);
+//					window.frmMicroissantW.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	public void visible() {
 		frmMicroissantW.setVisible(true);
@@ -135,12 +142,11 @@ public class Editor implements ActionListener {
 	/**
 	 * Create the application.
 	 */
-	public Editor(String idioma) {
-		this.listaTareas = new ArrayList<Tarea>();
+	public Editor(String idioma, String nombreUsuario) {
 		
-		// TODO: mostrar banner al usuario para que meta datos
-		
-//		listaTareas.add(new Tarea())
+		tarea1 = new Tarea("T1", "USUARIO", "ENUNCIADO");
+		tarea1.anhadeObjetivo(new Interaccion("ID", "NOMBRE", "", -1));
+		// TODO: meter interacciones y hacer lo mismo con el resto de tareas
 		
 		Editor.idioma = idioma;
 		initialize();
@@ -198,7 +204,7 @@ public class Editor implements ActionListener {
 		btnNuevo = new JButton("");
 		btnNuevo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Editor nuevo = new Editor(idioma);
+				Editor nuevo = new Editor(idioma, nombreUsuario);
 				nuevo.hazVisible();
 			}
 		});
@@ -216,7 +222,7 @@ public class Editor implements ActionListener {
 		btnAbrir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Editor nuevo = new Editor(idioma);
+				Editor nuevo = new Editor(idioma, nombreUsuario);
 				abrir(nuevo);
 				nuevo.hazVisible();
 			}
@@ -693,6 +699,49 @@ public class Editor implements ActionListener {
 			}
 		});
 		toolBar.add(btnJustificado);
+		
+		toolBar_1 = new JToolBar();
+		toolBar_1.setFloatable(false);
+		panel.add(toolBar_1, BorderLayout.NORTH);
+		
+		btnTarea1 = new JButton("Tarea 1");
+		toolBar_1.add(btnTarea1);
+		btnTarea1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO
+			}
+		});
+		btnTarea1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
+		btnTarea2 = new JButton("Tarea 2");
+		toolBar_1.add(btnTarea2);
+		btnTarea2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO
+			}
+		});
+		btnTarea2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
+		btnTarea3 = new JButton("Tarea 3");
+		toolBar_1.add(btnTarea3);
+		btnTarea3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO
+			}
+		});
+		btnTarea3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 
 		JPanel panel_1 = new JPanel();
 		frmMicroissantW.getContentPane().add(panel_1, BorderLayout.CENTER);
@@ -1038,10 +1087,10 @@ public class Editor implements ActionListener {
 		} else if (s.equals("Pegar") || s.equals("Paste")) {
 			textArea.replaceSelection(clipboard);
 		} else if (s.equals("Nuevo") || s.equals("New")) {
-			nuevo = new Editor(idioma);
+			nuevo = new Editor(idioma, nombreUsuario);
 			nuevo.hazVisible();
 		} else if (s.equals("Abrir") || s.equals("Open")) {
-			nuevo = new Editor(idioma);
+			nuevo = new Editor(idioma, nombreUsuario);
 			abrir(nuevo);
 			nuevo.hazVisible();
 		} else if (s.equals("Guardar") || s.equals("Save")) {
@@ -1095,6 +1144,10 @@ public class Editor implements ActionListener {
 
 	public void hazVisible() {
 		frmMicroissantW.setVisible(true);
+	}
+	
+	private void calculaMetricas( ) {
+		
 	}
 
 }
