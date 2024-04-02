@@ -8,7 +8,8 @@ public class Interaccion {
 	private String infoComplementaria; //saber que busca, fragmento que selecciona
 	private long tiempoMilisegundos; //instante en el que se realiza la interaccion
 	
-	public Interaccion(String identificador, String nombre, String infoComplementaria, long tiempoMilisegundos) {
+	public Interaccion(String identificador, String nombre, String infoComplementaria,
+					   long tiempoMilisegundos) {
 		this.identificador = identificador;
 		this.nombre = nombre;
 		this.infoComplementaria = infoComplementaria;

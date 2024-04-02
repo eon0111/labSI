@@ -3,6 +3,7 @@ package p6_IPC;
 import java.util.ArrayList;
 
 public class Tarea {
+	
 	private String identificador;
 	private String usuario; //usuario que realiza la tarea
 	private String enunciado; //lo que debe conseguir
@@ -56,4 +57,5 @@ public class Tarea {
 	public ArrayList<Interaccion> getListaInteraccionesCompletadas() {
 		return listaInteraccionesCompletadas;
 	}
+	
 }

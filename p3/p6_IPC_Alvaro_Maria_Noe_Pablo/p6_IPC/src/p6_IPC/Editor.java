@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.JButton;
@@ -44,8 +45,40 @@ public class Editor implements ActionListener {
 	
 	private Tarea tarea1;
 	private Tarea tarea2;
-	private Tarea tarea3;
+	
+	private IndiceTarea tareaActual;
+	
 	private String nombreUsuario;
+	private int nErrores = 0;
+	
+	/* Valores tasa de efectividad */
+	private final static int OPTIMO_TASA_EFECTIVIDAD = 1;
+	private final static int OBJETIVO_TASA_EFECTIVIDAD = 1;
+	private final static int PEOR_TASA_EFECTIVIDAD = 1;
+	
+	private static String ENUNCIADO_TAREA_1 =
+			  "TAREA 1:\r\n"
+			+ "  1. Escriba el siguiente texto: \"Lorem ipsum\"\r\n"
+			+ "  2. Póngalo en negrita\r\n"
+			+ "  3. Póngalo en cursiva\r\n"
+			+ "  4. Póngalo como texto subrayado";
+	
+	private static String ENUNCIADO_TAREA_2 = 
+			  "TAREA 2:\r\n"
+			+ "  1. Escriba el siguiente texto: \"Dolor sit amet\"\r\n"
+			+ "  2. Centre el texto en la página\r\n"
+			+ "  3. Alinee el texto a la derecha\r\n"
+			+ "  4. Recupere la alineación inicial";
+	
+	/* ID's interacciones tarea 1 */
+	private static String ID_NEGRITA = "t1i1";
+	private static String ID_CURSIVA = "t1i2";
+	private static String ID_SUBRAYADO = "t1i3";
+	
+	/* ID's interacciones tarea 2 */
+	private static String ID_CENTRO = "t2i1";
+	private static String ID_DCHA = "t2i2";
+	private static String ID_IZDA = "t2i3";
 
 	private JMenuItem mntmNuevo;
 	private JMenuItem mntmAbrir;
@@ -117,24 +150,9 @@ public class Editor implements ActionListener {
 	private JToolBar toolBar_1;
 	private JButton btnTarea1;
 	private JButton btnTarea2;
-	private JButton btnTarea3;
+	private JPanel panel_6;
+	private JButton btnFin;
 	
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					Editor window = new Editor(idioma);
-//					window.frmMicroissantW.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
 	public void visible() {
 		frmMicroissantW.setVisible(true);
 	}
@@ -144,9 +162,16 @@ public class Editor implements ActionListener {
 	 */
 	public Editor(String idioma, String nombreUsuario) {
 		
-		tarea1 = new Tarea("T1", "USUARIO", "ENUNCIADO");
-		tarea1.anhadeObjetivo(new Interaccion("ID", "NOMBRE", "", -1));
-		// TODO: meter interacciones y hacer lo mismo con el resto de tareas
+		/* Creacion de las tareas */
+		tarea1 = new Tarea("t1", nombreUsuario, ENUNCIADO_TAREA_1);
+		tarea1.anhadeObjetivo(new Interaccion(ID_NEGRITA, "Texto en negrita", "", -1));
+		tarea1.anhadeObjetivo(new Interaccion(ID_CURSIVA, "Texto en cursiva", "", -1));
+		tarea1.anhadeObjetivo(new Interaccion(ID_SUBRAYADO, "Texto subrayado", "", -1));
+		
+		tarea2 = new Tarea("t2", nombreUsuario, ENUNCIADO_TAREA_2);
+		tarea2.anhadeObjetivo(new Interaccion(ID_CENTRO, "Texto centrado", "", -1));
+		tarea2.anhadeObjetivo(new Interaccion(ID_DCHA, "Alineacion de texto a la dcha.", "", -1));
+		tarea2.anhadeObjetivo(new Interaccion(ID_IZDA, "Alineacion de texto a la izda.", "", -1));
 		
 		Editor.idioma = idioma;
 		initialize();
@@ -356,13 +381,13 @@ public class Editor implements ActionListener {
 		btnNegrita.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO: registrar interaccion
+				procesaInteraccion(IndiceTarea.TAREA_1, tarea1, ID_NEGRITA);
 				
 				doc = textArea.getStyledDocument();
 				SimpleAttributeSet neg = new SimpleAttributeSet();
 				if(! StyleConstants.isBold(textArea.getCharacterAttributes())) {
 					doc = textArea.getStyledDocument();
-					//Determinar el texto que es ha seleccionado para darle formato
+					//Determinar el texto que se ha seleccionado para darle formato
 					inicioSeleccion = textArea.getSelectionStart();
 					finSeleccion = textArea.getSelectionEnd();
 					longitudSeleccion = finSeleccion - inicioSeleccion;
@@ -409,6 +434,8 @@ public class Editor implements ActionListener {
 		btnCursiva.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				procesaInteraccion(IndiceTarea.TAREA_1, tarea1, ID_CURSIVA);
+				
 				doc = textArea.getStyledDocument();
 				SimpleAttributeSet cur = new SimpleAttributeSet();
 				if(! StyleConstants.isItalic(textArea.getCharacterAttributes())) {
@@ -458,6 +485,8 @@ public class Editor implements ActionListener {
 		btnSubrayar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				procesaInteraccion(IndiceTarea.TAREA_1, tarea1, ID_SUBRAYADO);
+				
 				doc = textArea.getStyledDocument();
 				SimpleAttributeSet sub = new SimpleAttributeSet();
 				if(! StyleConstants.isUnderline(textArea.getCharacterAttributes())) {
@@ -503,6 +532,8 @@ public class Editor implements ActionListener {
 		btnIzquierda.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				procesaInteraccion(IndiceTarea.TAREA_2, tarea2, ID_IZDA);
+				
 				//Documento asociado al editor
 				doc = textArea.getStyledDocument();
 				//Determinar el texto que es ha seleccionado para darle formato
@@ -618,6 +649,8 @@ public class Editor implements ActionListener {
 		btnCentrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				procesaInteraccion(IndiceTarea.TAREA_2, tarea2, ID_CENTRO);
+				
 				//Documento asociado al editor
 				doc = textArea.getStyledDocument();
 				//Determinar el texto que es ha seleccionado para darle formato
@@ -649,6 +682,8 @@ public class Editor implements ActionListener {
 		btnDerecha.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				procesaInteraccion(IndiceTarea.TAREA_2, tarea2, ID_DCHA);
+				
 				//Documento asociado al editor
 				doc = textArea.getStyledDocument();
 				//Determinar el texto que es ha seleccionado para darle formato
@@ -700,49 +735,6 @@ public class Editor implements ActionListener {
 		});
 		toolBar.add(btnJustificado);
 		
-		toolBar_1 = new JToolBar();
-		toolBar_1.setFloatable(false);
-		panel.add(toolBar_1, BorderLayout.NORTH);
-		
-		btnTarea1 = new JButton("Tarea 1");
-		toolBar_1.add(btnTarea1);
-		btnTarea1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO
-			}
-		});
-		btnTarea1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
-		btnTarea2 = new JButton("Tarea 2");
-		toolBar_1.add(btnTarea2);
-		btnTarea2.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO
-			}
-		});
-		btnTarea2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
-		btnTarea3 = new JButton("Tarea 3");
-		toolBar_1.add(btnTarea3);
-		btnTarea3.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO
-			}
-		});
-		btnTarea3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-
 		JPanel panel_1 = new JPanel();
 		frmMicroissantW.getContentPane().add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new BorderLayout(0, 0));
@@ -931,6 +923,80 @@ public class Editor implements ActionListener {
 		});
 		menuBar.add(textFieldReemplazar);
 		textFieldReemplazar.setColumns(10);
+		
+		/***********************************************************************
+		 * 						   BARRA MENU TAREAS						   *
+		 **********************************************************************/
+		toolBar_1 = new JToolBar();
+		toolBar_1.setFloatable(false);
+		panel.add(toolBar_1, BorderLayout.NORTH);
+		
+		/************************** Boton Tarea 1 *****************************/
+		btnTarea1 = new JButton("Tarea 1");
+		btnTarea1.setToolTipText(ENUNCIADO_TAREA_1);
+		toolBar_1.add(btnTarea1);
+		btnTarea1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tareaActual = IndiceTarea.TAREA_1;
+			}
+		});
+		btnTarea1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
+		/************************** Boton Tarea 2 *****************************/
+		btnTarea2 = new JButton("Tarea 2");
+		btnTarea1.setToolTipText(ENUNCIADO_TAREA_2);
+		toolBar_1.add(btnTarea2);
+		btnTarea1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tareaActual = IndiceTarea.TAREA_2;
+			}
+		});
+		btnTarea1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
+		/************************* Boton Finalizar ****************************/
+		panel_6 = new JPanel();
+		toolBar_1.add(panel_6);
+		btnFin = new JButton("Finalizar");
+		toolBar_1.add(btnFin);
+		btnFin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				/* Calculo de metricas de usabilidad */
+				
+				/******************** TASA DE EFECTIVIDAD *********************/
+				TasaEfectividad te1 =
+						new TasaEfectividad("Tasa de efectividad en la tarea 1",
+								tarea1,
+								OPTIMO_TASA_EFECTIVIDAD,
+								OBJETIVO_TASA_EFECTIVIDAD,
+								PEOR_TASA_EFECTIVIDAD);
+				te1.calculaMedida();
+				
+				TasaEfectividad te2 =
+						new TasaEfectividad("Tasa de efectividad en la tarea 2",
+								tarea2,
+								OPTIMO_TASA_EFECTIVIDAD,
+								OBJETIVO_TASA_EFECTIVIDAD,
+								PEOR_TASA_EFECTIVIDAD);
+				te2.calculaMedida();
+				
+				Satisfaccion ventanaSatisfaccion = new Satisfaccion();
+				ventanaSatisfaccion.visible();
+				frmMicroissantW.dispose();
+			}
+		});
+		btnTarea2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 	}
 
 	@Override
@@ -1146,9 +1212,35 @@ public class Editor implements ActionListener {
 		frmMicroissantW.setVisible(true);
 	}
 	
-	private void calculaMetricas( ) {
-		
+	private void calculaMetricas() {
+		// TODO
 	}
 
-}
+	/**
+	 * Registra el instante en que se produce una interaccion concreta de una
+	 * tarea concreta, y el texto sobre el que la interaccion se lleva a cabo.
+	 */
+	private void procesaInteraccion(IndiceTarea i, Tarea t, String idInt) {
+		if (tareaActual == i) {
+			doc = textArea.getStyledDocument();
+			inicioSeleccion = textArea.getSelectionStart();
+			finSeleccion = textArea.getSelectionEnd();
+								
+			try {
+				t.completaObjetivo(
+						new Interaccion(idInt, nombreUsuario,
+								doc.getText(inicioSeleccion, finSeleccion),
+								System.currentTimeMillis()));
+			} catch (BadLocationException e1) {
+				e1.printStackTrace();
+			}
+		} else {
+			/* Si se lleva a cabo una interaccion no objetivo al realizar una
+			 * tarea se contabiliza el error */
+			nErrores++;
+		}
+	}
+	
+	
 
+}

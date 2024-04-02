@@ -4,18 +4,26 @@ import java.util.ArrayList;
 
 public class TasaEfectividad extends Medida {
 
-    public TasaEfectividad(String nombre, Tarea tarea, double optimo, double objetivo, double peorAceptable) {
+    public TasaEfectividad (String nombre, Tarea tarea, double optimo,
+    						double objetivo, double peorAceptable) {
         super(nombre, tarea, optimo, objetivo, peorAceptable);
     }
 
-    public void calcularMedida (ArrayList<Interaccion> interacciones) {
-        int numObj = 0;
+    /**
+     * Calcula la tasa de efectividad de la tarea como el cociente entre el
+     * numero de objetivos completados entre el numero de objetivos totales de
+     * la tarea.
+     */
+    public void calculaMedida () {
+        ArrayList<Interaccion> completadas = getTarea().getListaInteraccionesCompletadas();
         ArrayList<Interaccion> objetivos = getTarea().getListaInteraccionesObjetivo();
-        for (Interaccion i: interacciones) {
-            if (objetivos.contains(i)) {
-                numObj++;
-            }
-        }
-        setActual(numObj / objetivos.size());
+        int numObjCompletados = 0;
+        
+        for (Interaccion i: completadas)
+            if (objetivos.contains(i))
+                numObjCompletados++;
+
+        setMedida(numObjCompletados / objetivos.size());
     }
+    
 }

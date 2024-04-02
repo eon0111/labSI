@@ -1,0 +1,60 @@
+Lo primero que salga al abrir sea que introduzca el nombre de usuario para mostrarle un usuario, se almacenan las interacciones que realiza el usuario para obtener valores, luego se le pide que introduzca la satisfaccion en una escala (1 a 5), para efectividad si no se puede preguntar los objetivos conseguidos o el numero de errores si no se puede calcular
+
+class Editor {
+	private ArrayList<Tarea> listaTareas; //en teoria se tendrian varios usuarios
+
+	public void calcularMetricas () {
+		// llamar a la clase medida para estos calculos
+
+		//Eficacia:
+		//Tiempo para completar la tarea = Tiempo ultima interaccion - Tiempo primera interaccion
+		//Velocidad de tarea = Nº objetivos del enunciado de la tarea / Tiempo para completar la tarea
+		//Interacciones por segundo = Nº de interacciones / Tiempo para completar la tarea
+
+		//Efectividad:
+		//Tasa de efectividad = Nº objetivos conseguidos / Nº objetivos totales propuestos
+		//Nº errores = Nº interacciones que no se tenian que realizar
+	}
+}
+
+class Tarea {
+	private String identificador;
+	private String usuario; //usuario que realiza la tarea
+	private String enunciado; //lo que debe conseguir
+	private ArrayList<Interaccion> listaInteracciones;
+
+	// metodos get/set/añade interaccion
+}
+
+class Interaccion {
+	private String identificador;
+	private String nombre; //lo que realiza
+	private String infoComplementaria; //saber que busca, fragmento que selecciona
+	private long tiempoMilisegundos; //instante en el que se realiza la interaccion
+
+	// metodos get/set
+}
+
+//codigo para dar valores a tiempoMilisegundos
+import java.util.Date;
+
+//obtener fecha actual
+Date date = new Date();
+long time = date.getTime(); //hora actual con precision ms
+
+class Medida {
+	private String nombre;
+	private double optimo;
+	private double objetivo;
+	private double poerAceptable;
+	private double actual;
+
+	// metodos get/set
+	// calcular medida, emplear para los calculos
+}
+
+Mostrar mensaje al usuario por cada métrica con sus valores optimo etc para que vea sus resultados y que se generan las gráficas, con la intención de informar de las métricas, hacer varias tareas para poder hacer los calculos y mostrarlos, varias tareas por el tema de usuarios en el arraylist, se pueden simular las interacciones tambien 
+
+Generar gráficos y mostrar las métricas de manera visual, utilizar archivos jar para la libreria JFreechart
+Reutilizar código de Visualizacion pero cambiar los gráficos, uno por cada tipo de métrica
+createBar los últimos valores true, true, false --> existe leyenda (segundo parámetro del dataset), activa el tooltip (no afecta por ser png), activa la url que indica más información del gráfico (no afecta por ser png)

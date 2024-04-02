@@ -13,11 +13,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import java.awt.Color;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 public class RecogidaDatosUsuario {
 
 	private JFrame frame;
-	private JTextField txtTareaTodo;
 	private JTextField tfNombre;
 
 	/**
@@ -57,6 +58,7 @@ public class RecogidaDatosUsuario {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setTitle("Datos del usuario - Microissant Wort 2021");
 		frame.getContentPane().setLayout(null);
 		
 		JTextArea tituloTarea = new JTextArea();
@@ -66,13 +68,6 @@ public class RecogidaDatosUsuario {
 		tituloTarea.setEditable(false);
 		tituloTarea.setBounds(103, 11, 230, 26);
 		frame.getContentPane().add(tituloTarea);
-		
-		txtTareaTodo = new JTextField();
-		txtTareaTodo.setText("TODO");
-		txtTareaTodo.setEditable(false);
-		txtTareaTodo.setBounds(10, 48, 414, 141);
-		frame.getContentPane().add(txtTareaTodo);
-		txtTareaTodo.setColumns(10);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -87,11 +82,28 @@ public class RecogidaDatosUsuario {
 		JButton btnContinuar = new JButton("Continuar");
 		btnContinuar.setBounds(292, 216, 89, 23);
 		frame.getContentPane().add(btnContinuar);
+		
+		JTextArea txtTarea1 = new JTextArea();
+		txtTarea1.setFont(new Font("Arial", Font.PLAIN, 11));
+		txtTarea1.setText("TAREA 1:\r\n  1. Escriba el siguiente texto: \"Lorem ipsum\"\r\n  2. Póngalo en negrita\r\n  3. Póngalo en cursiva\r\n  4. Póngalo como texto subrayado");
+		txtTarea1.setEditable(false);
+		txtTarea1.setBackground(UIManager.getColor("Button.background"));
+		txtTarea1.setBounds(10, 48, 414, 69);
+		frame.getContentPane().add(txtTarea1);
+		
+		JTextArea txtTarea2 = new JTextArea();
+		txtTarea2.setText("TAREA 2:\r\n  1. Escriba el siguiente texto: \"Dolor sit amet\"\r\n  2. Centre el texto en la página\r\n  3. Alinee el texto a la derecha\r\n  4. Recupere la alineación inicial");
+		txtTarea2.setFont(new Font("Arial", Font.PLAIN, 11));
+		txtTarea2.setEditable(false);
+		txtTarea2.setBackground(UIManager.getColor("Button.background"));
+		txtTarea2.setBounds(10, 128, 414, 69);
+		frame.getContentPane().add(txtTarea2);
 		btnContinuar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Editor editor = new Editor("es", tfNombre.getText());
 				editor.visible();
+				frame.dispose();
 			}
 		});
 		btnContinuar.addActionListener(new ActionListener() {
