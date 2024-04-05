@@ -1,6 +1,5 @@
 package p6_IPC;
 
-import java.awt.EventQueue;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -13,8 +12,6 @@ import javax.swing.JToolBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
@@ -30,7 +27,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.JButton;
@@ -97,13 +93,15 @@ public class Editor implements ActionListener {
 	/* Medidas */
 	/* -- Tiempo de realizacion -- */
 	private TiempoTarea tiempoTareaT1 =
-			new TiempoTarea("Tiempo de realización de la tarea 1",
+			new TiempoTarea("tiempoTarea1",
+							"Tiempo de realización de la tarea 1",
 							tarea1,
 							OPTIMO_TIEMPO_REALIZACION,
 							OBJETIVO_TIEMPO_REALIZACION,
 							PEOR_TIEMPO_REALIZACION);
 	private TiempoTarea tiempoTareaT2 =
-			new TiempoTarea("Tiempo de realización de la tarea 2",
+			new TiempoTarea("tiempoTarea2",
+							"Tiempo de realización de la tarea 2",
 							tarea2,
 							OPTIMO_TIEMPO_REALIZACION,
 							OBJETIVO_TIEMPO_REALIZACION,
@@ -111,44 +109,50 @@ public class Editor implements ActionListener {
 	
 	/* -- Numero de errores -- */
 	private ArrayList<Errores> listaErrores = new ArrayList<Errores>();
-	private Errores nErroresT1 = new Errores("Numero de errores en la tarea 1",
-									 tarea1,
-									 OPTIMO_ERRORES,
-									 OBJETIVO_ERRORES,
-									 PEOR_ERRORES);
-	private Errores nErroresT2 = new Errores("Numero de errores en la tarea 2",
-									 tarea2,
-									 OPTIMO_ERRORES,
-									 OBJETIVO_ERRORES,
-									 PEOR_ERRORES);
-	
-	/* -- Tasa de efectividad -- */
-	private TasaEfectividad tasaEfectividadT1 =
-			new TasaEfectividad("Tasa de efectividad en la tarea 1",
-								tarea1,
-								OPTIMO_TASA_EFECTIVIDAD,
-								OBJETIVO_TASA_EFECTIVIDAD,
-								PEOR_TASA_EFECTIVIDAD);
-	private TasaEfectividad tasaEfectividadT2 =
-			new TasaEfectividad("Tasa de efectividad en la tarea 2",
-								tarea2,
-								OPTIMO_TASA_EFECTIVIDAD,
-								OBJETIVO_TASA_EFECTIVIDAD,
-								PEOR_TASA_EFECTIVIDAD);
+	private Errores nErroresT1 = new Errores("erroresTarea1",
+											 "Numero de errores en la tarea 1",
+											 tarea1,
+											 OPTIMO_ERRORES,
+											 OBJETIVO_ERRORES,
+											 PEOR_ERRORES);
+	private Errores nErroresT2 = new Errores("erroresTarea2",
+											 "Numero de errores en la tarea 2",
+											 tarea2,
+											 OPTIMO_ERRORES,
+											 OBJETIVO_ERRORES,
+											 PEOR_ERRORES);
 	
 	/* -- Velocidad de realizacion -- */
 	private VelocidadTarea velocidadT1 =
-			new VelocidadTarea("Velocidad de realización en la tarea 1",
+			new VelocidadTarea("velocidadTarea1",
+							   "Velocidad de realización en la tarea 1",
 							   tarea1,
 							   OPTIMO_VELOCIDAD_REALIZACION,
 							   OBJETIVO_VELOCIDAD_REALIZACION,
 							   PEOR_VELOCIDAD_REALIZACION);
 	private VelocidadTarea velocidadT2 =
-			new VelocidadTarea("Velocidad de realización en la tarea 2",
+			new VelocidadTarea("velocidadTarea2",
+							   "Velocidad de realización en la tarea 2",
 							   tarea2,
 							   OPTIMO_VELOCIDAD_REALIZACION,
 							   OBJETIVO_VELOCIDAD_REALIZACION,
 							   PEOR_VELOCIDAD_REALIZACION);
+	
+	/* -- Tasa de efectividad -- */
+	private TasaEfectividad tasaEfectividadT1 =
+			new TasaEfectividad("efectividadTarea1",
+								"Tasa de efectividad en la tarea 1",
+								tarea1,
+								OPTIMO_TASA_EFECTIVIDAD,
+								OBJETIVO_TASA_EFECTIVIDAD,
+								PEOR_TASA_EFECTIVIDAD);
+	private TasaEfectividad tasaEfectividadT2 =
+			new TasaEfectividad("efectividadTarea2",
+								"Tasa de efectividad en la tarea 2",
+								tarea2,
+								OPTIMO_TASA_EFECTIVIDAD,
+								OBJETIVO_TASA_EFECTIVIDAD,
+								PEOR_TASA_EFECTIVIDAD);
 	
 	/* Eltos. de la interfaz */
 	private JMenuItem mntmNuevo;
@@ -1039,30 +1043,30 @@ public class Editor implements ActionListener {
 			public void mouseClicked(MouseEvent e) {
 				Satisfaccion ventanaSatisfaccion = new Satisfaccion();
 				
-				// TODO: quitar este TODO, es solo una referencia
+				// TODO: quitar este TODO, es una referencia en el código
 				
 				/* Calculo de metricas de usabilidad y generacion de graficas */
 				/******************* TIEMPO DE REALIZACION *********************/
 				tiempoTareaT1.calculaMedida();
-				ventanaSatisfaccion.addMedida(tiempoTareaT1, IndiceTarea.TAREA_1);
+				ventanaSatisfaccion.addMedida(tiempoTareaT1.getId(), tiempoTareaT1, IndiceTarea.TAREA_1);
 				tiempoTareaT2.calculaMedida();
-				ventanaSatisfaccion.addMedida(tiempoTareaT2, IndiceTarea.TAREA_2);
+				ventanaSatisfaccion.addMedida(tiempoTareaT2.getId(), tiempoTareaT2, IndiceTarea.TAREA_2);
 				
 				/********************** No. DE ERRORES ************************/
-				ventanaSatisfaccion.addMedida(nErroresT1, IndiceTarea.TAREA_1);
-				ventanaSatisfaccion.addMedida(nErroresT2, IndiceTarea.TAREA_2);
+				ventanaSatisfaccion.addMedida(nErroresT1.getId(), nErroresT1, IndiceTarea.TAREA_1);
+				ventanaSatisfaccion.addMedida(nErroresT2.getId(), nErroresT2, IndiceTarea.TAREA_2);
 				
 				/******************** TASA DE EFECTIVIDAD *********************/
 				tasaEfectividadT1.calculaMedida();
-				ventanaSatisfaccion.addMedida(tasaEfectividadT1, IndiceTarea.TAREA_1);
+				ventanaSatisfaccion.addMedida(tasaEfectividadT1.getId(), tasaEfectividadT1, IndiceTarea.TAREA_1);
 				tasaEfectividadT2.calculaMedida();
-				ventanaSatisfaccion.addMedida(tasaEfectividadT2, IndiceTarea.TAREA_2);
+				ventanaSatisfaccion.addMedida(tasaEfectividadT2.getId(), tasaEfectividadT2, IndiceTarea.TAREA_2);
 				
 				/****************** VELOCIDAD DE REALIZACION ******************/
 				velocidadT1.calculaMedida();
-				ventanaSatisfaccion.addMedida(velocidadT1, IndiceTarea.TAREA_1);
+				ventanaSatisfaccion.addMedida(velocidadT1.getId(), velocidadT1, IndiceTarea.TAREA_1);
 				velocidadT2.calculaMedida();
-				ventanaSatisfaccion.addMedida(velocidadT2, IndiceTarea.TAREA_2);
+				ventanaSatisfaccion.addMedida(velocidadT2.getId(), velocidadT2, IndiceTarea.TAREA_2);
 				
 				ventanaSatisfaccion.visible();
 				frmMicroissantW.dispose();
@@ -1287,10 +1291,6 @@ public class Editor implements ActionListener {
 		frmMicroissantW.setVisible(true);
 	}
 	
-	private void calculaMetricas() {
-		// TODO
-	}
-
 	/**
 	 * Registra el instante en que se produce una interaccion concreta de una
 	 * tarea concreta, y el texto sobre el que la interaccion se lleva a cabo.

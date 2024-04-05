@@ -1,7 +1,5 @@
 package p6_IPC;
 
-import java.util.ArrayList;
-
 public abstract class Medida {
 	
 	private String id;

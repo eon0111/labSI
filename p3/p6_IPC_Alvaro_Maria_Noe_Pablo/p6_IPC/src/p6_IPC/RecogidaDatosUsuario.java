@@ -1,7 +1,6 @@
 package p6_IPC;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -13,7 +12,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import java.awt.Color;
-import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
 public class RecogidaDatosUsuario {

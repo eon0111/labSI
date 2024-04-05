@@ -1,17 +1,13 @@
 package p6_IPC;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
-
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
-
-import java.awt.Color;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +15,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.awt.Font;
 import javax.swing.JSlider;
@@ -269,7 +264,6 @@ public class Satisfaccion {
 		DefaultCategoryDataset datasetSatisfaccion = new DefaultCategoryDataset();
 		DefaultCategoryDataset datasetVelocidad = new DefaultCategoryDataset();
 		DefaultCategoryDataset datasetEfectividad = new DefaultCategoryDataset();
-		DefaultCategoryDataset datasetInteraccionesSegundo = new DefaultCategoryDataset();
 
 		// Datos Tarea 1
 		datasetTiempo.setValue(medidasT1.get("tiempoTarea1").getMedida(), TAREA1, "Tiempo");
@@ -277,7 +271,6 @@ public class Satisfaccion {
 		datasetSatisfaccion.setValue(satisfaccionT1, TAREA1, "Satisfaccion");
 		datasetVelocidad.setValue(medidasT1.get("velocidadTarea1").getMedida(), TAREA1, "Velocidad (interacciones/s");
 		datasetEfectividad.setValue(medidasT1.get("efectividadTarea1").getMedida(), TAREA1, "Tasa de efectividad");
-		datasetInteraccionesSegundo.setValue(medidasT1.get("interaccionesSegundoTarea1").getMedida(), TAREA1, "Interacciones/s");
 
 		// Datos Tarea 2
 		datasetTiempo.setValue(medidasT2.get("tiempoTarea2").getMedida(), TAREA2, "Tiempo");
@@ -285,7 +278,6 @@ public class Satisfaccion {
 		datasetSatisfaccion.setValue(satisfaccionT2, TAREA2, "Satisfaccion");
 		datasetVelocidad.setValue(medidasT2.get("velocidadTarea2").getMedida(), TAREA2, "Velocidad (interacciones/s");
 		datasetEfectividad.setValue(medidasT2.get("efectividadTarea2").getMedida(), TAREA2, "Tasa de efectividad");
-		datasetInteraccionesSegundo.setValue(medidasT2.get("interaccionesSegundoTarea2").getMedida(), TAREA2, "Interacciones/s");
 		
 		// Creación de las gráficas
 		generaGrafica(datasetTiempo, "Tiempo de compleción", "Tiempo (ms)", "tiempoComplecion.png");
@@ -293,7 +285,6 @@ public class Satisfaccion {
 		generaGrafica(datasetSatisfaccion, "Satisfacción", "Valor", "satisfaccion.png");
 		generaGrafica(datasetVelocidad, "Velocidad de interacción", "Velocidad (interacciones/s)", "velocidad.png");
 		generaGrafica(datasetEfectividad, "Tasa de efectividad", "Valor", "efectividad.png");
-		generaGrafica(datasetInteraccionesSegundo, "Interacciones", "Velocidad (interacciones/s)", "velocidad.png");
 		
 	}
 	
