@@ -1,21 +1,20 @@
 package p6_IPC;
 
-import java.util.ArrayList;
-
 public class Errores extends Medida {
+	
+	private int nErrores;
 
-    public Errores(String nombre, Tarea tarea, double optimo, double objetivo, double peorAceptable) {
-        super(nombre, tarea, optimo, objetivo, peorAceptable);
+    public Errores(String id, String nombre, Tarea tarea, double optimo,
+    			   double objetivo, double peorAceptable) {
+        super(id, nombre, tarea, optimo, objetivo, peorAceptable);
+        this.nErrores = 0;
     }
 
-    public void calcularMedida (ArrayList<Interaccion> interacciones) {
-        int errores = interacciones.size();
-        ArrayList<Interaccion> objetivos = getTarea().getListaInteraccionesObjetivo();
-        for (Interaccion i: interacciones) {
-            if (objetivos.contains(i)) {
-                errores--;
-            }
-        }
-        setActual(errores);
+    public void addError () {
+    	nErrores++;
+    }
+    
+    public int getErrores () {
+    	return nErrores;
     }
 }

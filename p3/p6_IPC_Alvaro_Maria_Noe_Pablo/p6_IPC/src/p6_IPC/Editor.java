@@ -43,18 +43,32 @@ import javax.swing.DefaultComboBoxModel;
 
 public class Editor implements ActionListener {
 	
+	private IndiceTarea tareaActual;
+
 	private Tarea tarea1;
 	private Tarea tarea2;
 	
-	private IndiceTarea tareaActual;
-	
 	private String nombreUsuario;
-	private int nErrores = 0;
+	
+	/* Valores tiempo de realizacion */
+	private final static int OPTIMO_TIEMPO_REALIZACION = 1;
+	private final static int OBJETIVO_TIEMPO_REALIZACION = 1;
+	private final static int PEOR_TIEMPO_REALIZACION = 1;
+	
+	/* Valores numero de errores */
+	private final static int OPTIMO_ERRORES = 0;
+	private final static int OBJETIVO_ERRORES = 3;
+	private final static int PEOR_ERRORES = 50;
 	
 	/* Valores tasa de efectividad */
 	private final static int OPTIMO_TASA_EFECTIVIDAD = 1;
 	private final static int OBJETIVO_TASA_EFECTIVIDAD = 1;
 	private final static int PEOR_TASA_EFECTIVIDAD = 1;
+	
+	/* Valores velocidad de realizacion */
+	private final static int OPTIMO_VELOCIDAD_REALIZACION = 1;
+	private final static int OBJETIVO_VELOCIDAD_REALIZACION = 1;
+	private final static int PEOR_VELOCIDAD_REALIZACION = 1;
 	
 	private static String ENUNCIADO_TAREA_1 =
 			  "TAREA 1:\r\n"
@@ -79,7 +93,64 @@ public class Editor implements ActionListener {
 	private static String ID_CENTRO = "t2i1";
 	private static String ID_DCHA = "t2i2";
 	private static String ID_IZDA = "t2i3";
-
+	
+	/* Medidas */
+	/* -- Tiempo de realizacion -- */
+	private TiempoTarea tiempoTareaT1 =
+			new TiempoTarea("Tiempo de realización de la tarea 1",
+							tarea1,
+							OPTIMO_TIEMPO_REALIZACION,
+							OBJETIVO_TIEMPO_REALIZACION,
+							PEOR_TIEMPO_REALIZACION);
+	private TiempoTarea tiempoTareaT2 =
+			new TiempoTarea("Tiempo de realización de la tarea 2",
+							tarea2,
+							OPTIMO_TIEMPO_REALIZACION,
+							OBJETIVO_TIEMPO_REALIZACION,
+							PEOR_TIEMPO_REALIZACION);
+	
+	/* -- Numero de errores -- */
+	private ArrayList<Errores> listaErrores = new ArrayList<Errores>();
+	private Errores nErroresT1 = new Errores("Numero de errores en la tarea 1",
+									 tarea1,
+									 OPTIMO_ERRORES,
+									 OBJETIVO_ERRORES,
+									 PEOR_ERRORES);
+	private Errores nErroresT2 = new Errores("Numero de errores en la tarea 2",
+									 tarea2,
+									 OPTIMO_ERRORES,
+									 OBJETIVO_ERRORES,
+									 PEOR_ERRORES);
+	
+	/* -- Tasa de efectividad -- */
+	private TasaEfectividad tasaEfectividadT1 =
+			new TasaEfectividad("Tasa de efectividad en la tarea 1",
+								tarea1,
+								OPTIMO_TASA_EFECTIVIDAD,
+								OBJETIVO_TASA_EFECTIVIDAD,
+								PEOR_TASA_EFECTIVIDAD);
+	private TasaEfectividad tasaEfectividadT2 =
+			new TasaEfectividad("Tasa de efectividad en la tarea 2",
+								tarea2,
+								OPTIMO_TASA_EFECTIVIDAD,
+								OBJETIVO_TASA_EFECTIVIDAD,
+								PEOR_TASA_EFECTIVIDAD);
+	
+	/* -- Velocidad de realizacion -- */
+	private VelocidadTarea velocidadT1 =
+			new VelocidadTarea("Velocidad de realización en la tarea 1",
+							   tarea1,
+							   OPTIMO_VELOCIDAD_REALIZACION,
+							   OBJETIVO_VELOCIDAD_REALIZACION,
+							   PEOR_VELOCIDAD_REALIZACION);
+	private VelocidadTarea velocidadT2 =
+			new VelocidadTarea("Velocidad de realización en la tarea 2",
+							   tarea2,
+							   OPTIMO_VELOCIDAD_REALIZACION,
+							   OBJETIVO_VELOCIDAD_REALIZACION,
+							   PEOR_VELOCIDAD_REALIZACION);
+	
+	/* Eltos. de la interfaz */
 	private JMenuItem mntmNuevo;
 	private JMenuItem mntmAbrir;
 	private JMenuItem mntmGuardar;
@@ -95,12 +166,9 @@ public class Editor implements ActionListener {
 	private JMenuItem mntmRight;
 	private String clipboard;
 	private String busqueda;
-
 	private JFrame frmMicroissantW;
-
 	private StyledDocument doc;
 	private JTextPane textArea;
-
 	private static final String nombreFichero = "receta";
 	private static final String extension = ".txt";
 	private File fich;
@@ -127,9 +195,7 @@ public class Editor implements ActionListener {
 	private JPanel panel_4;
 	private JButton btnColor;
 	private JColorChooser ventanaDeColores;
-
 	private static Locale localizacion = null;
-
 	private JMenu mnEstilo;
 	private JMenuItem mntmGuardarComo;
 	private static String idioma = "";
@@ -145,7 +211,6 @@ public class Editor implements ActionListener {
 	private JPanel panel_5;
 	private JLabel lblBusqueda;
 	private JTextField textFieldReemplazar;
-
 	private ResourceBundle mensajes = null;
 	private JToolBar toolBar_1;
 	private JButton btnTarea1;
@@ -172,6 +237,9 @@ public class Editor implements ActionListener {
 		tarea2.anhadeObjetivo(new Interaccion(ID_CENTRO, "Texto centrado", "", -1));
 		tarea2.anhadeObjetivo(new Interaccion(ID_DCHA, "Alineacion de texto a la dcha.", "", -1));
 		tarea2.anhadeObjetivo(new Interaccion(ID_IZDA, "Alineacion de texto a la izda.", "", -1));
+		
+		listaErrores.add(nErroresT1);
+		listaErrores.add(nErroresT2);
 		
 		Editor.idioma = idioma;
 		initialize();
@@ -969,26 +1037,33 @@ public class Editor implements ActionListener {
 		btnFin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				/* Calculo de metricas de usabilidad */
+				Satisfaccion ventanaSatisfaccion = new Satisfaccion();
+				
+				// TODO: quitar este TODO, es solo una referencia
+				
+				/* Calculo de metricas de usabilidad y generacion de graficas */
+				/******************* TIEMPO DE REALIZACION *********************/
+				tiempoTareaT1.calculaMedida();
+				ventanaSatisfaccion.addMedida(tiempoTareaT1, IndiceTarea.TAREA_1);
+				tiempoTareaT2.calculaMedida();
+				ventanaSatisfaccion.addMedida(tiempoTareaT2, IndiceTarea.TAREA_2);
+				
+				/********************** No. DE ERRORES ************************/
+				ventanaSatisfaccion.addMedida(nErroresT1, IndiceTarea.TAREA_1);
+				ventanaSatisfaccion.addMedida(nErroresT2, IndiceTarea.TAREA_2);
 				
 				/******************** TASA DE EFECTIVIDAD *********************/
-				TasaEfectividad te1 =
-						new TasaEfectividad("Tasa de efectividad en la tarea 1",
-								tarea1,
-								OPTIMO_TASA_EFECTIVIDAD,
-								OBJETIVO_TASA_EFECTIVIDAD,
-								PEOR_TASA_EFECTIVIDAD);
-				te1.calculaMedida();
+				tasaEfectividadT1.calculaMedida();
+				ventanaSatisfaccion.addMedida(tasaEfectividadT1, IndiceTarea.TAREA_1);
+				tasaEfectividadT2.calculaMedida();
+				ventanaSatisfaccion.addMedida(tasaEfectividadT2, IndiceTarea.TAREA_2);
 				
-				TasaEfectividad te2 =
-						new TasaEfectividad("Tasa de efectividad en la tarea 2",
-								tarea2,
-								OPTIMO_TASA_EFECTIVIDAD,
-								OBJETIVO_TASA_EFECTIVIDAD,
-								PEOR_TASA_EFECTIVIDAD);
-				te2.calculaMedida();
+				/****************** VELOCIDAD DE REALIZACION ******************/
+				velocidadT1.calculaMedida();
+				ventanaSatisfaccion.addMedida(velocidadT1, IndiceTarea.TAREA_1);
+				velocidadT2.calculaMedida();
+				ventanaSatisfaccion.addMedida(velocidadT2, IndiceTarea.TAREA_2);
 				
-				Satisfaccion ventanaSatisfaccion = new Satisfaccion();
 				ventanaSatisfaccion.visible();
 				frmMicroissantW.dispose();
 			}
@@ -1237,10 +1312,8 @@ public class Editor implements ActionListener {
 		} else {
 			/* Si se lleva a cabo una interaccion no objetivo al realizar una
 			 * tarea se contabiliza el error */
-			nErrores++;
+			listaErrores.get(tareaActual.ordinal()).addError();
 		}
 	}
 	
-	
-
 }

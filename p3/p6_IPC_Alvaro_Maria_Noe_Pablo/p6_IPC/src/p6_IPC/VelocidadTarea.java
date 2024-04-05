@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class VelocidadTarea extends Medida {
 
-    public VelocidadTarea (String nombre, Tarea tarea, double optimo,
+    public VelocidadTarea (String id, String nombre, Tarea tarea, double optimo,
     					   double objetivo, double peorAceptable) {
-        super(nombre, tarea, optimo, objetivo, peorAceptable);
+        super(id, nombre, tarea, optimo, objetivo, peorAceptable);
     }
 
     public void calcularMedida () {
@@ -16,4 +16,5 @@ public class VelocidadTarea extends Medida {
         double tiempo = tiempoFin - tiempoIni;
         setMedida(getTarea().getListaInteraccionesObjetivo().size() / tiempo);
     }
+    
 }

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class TiempoTarea extends Medida {
     
-    public TiempoTarea (String nombre, Tarea tarea, double optimo, double objetivo,
-    					double peorAceptable) {
-        super(nombre, tarea, optimo, objetivo, peorAceptable);
+    public TiempoTarea (String id, String nombre, Tarea tarea, double optimo,
+    					double objetivo, double peorAceptable) {
+        super(id, nombre, tarea, optimo, objetivo, peorAceptable);
     }
 
     public void calcularMedida () {

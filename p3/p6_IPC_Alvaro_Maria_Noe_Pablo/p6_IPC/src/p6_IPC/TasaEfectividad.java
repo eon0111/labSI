@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class TasaEfectividad extends Medida {
 
-    public TasaEfectividad (String nombre, Tarea tarea, double optimo,
+    public TasaEfectividad (String id, String nombre, Tarea tarea, double optimo,
     						double objetivo, double peorAceptable) {
-        super(nombre, tarea, optimo, objetivo, peorAceptable);
+        super(id, nombre, tarea, optimo, objetivo, peorAceptable);
     }
 
     /**

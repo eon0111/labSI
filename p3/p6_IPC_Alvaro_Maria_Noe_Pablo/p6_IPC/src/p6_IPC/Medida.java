@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public abstract class Medida {
 	
+	private String id;
 	private String nombre;
 	private Tarea tarea;
 	private double optimo;
@@ -11,13 +12,22 @@ public abstract class Medida {
 	private double peorAceptable;
 	private double medida;
 
-	public Medida (String nombre, Tarea tarea, double optimo, double objetivo,
-				   double peorAceptable) {
+	public Medida (String id, String nombre, Tarea tarea, double optimo,
+				   double objetivo, double peorAceptable) {
+		this.id = id;
 		this.nombre = nombre;
 		this.tarea = tarea;
 		this.optimo = optimo;
 		this.objetivo = objetivo;
 		this.peorAceptable = peorAceptable;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public void setNombre (String nombre) {
