@@ -1,4 +1,4 @@
-package p6_IPC;
+package misc;
 
 public enum IndiceTarea {
 	

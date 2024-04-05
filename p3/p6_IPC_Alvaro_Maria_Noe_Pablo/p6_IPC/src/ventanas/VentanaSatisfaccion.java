@@ -1,4 +1,4 @@
-package p6_IPC;
+package ventanas;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -8,6 +8,10 @@ import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+
+import medidas.Medida;
+import misc.IndiceTarea;
+
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +25,7 @@ import javax.swing.JSlider;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
-public class Satisfaccion {
+public class VentanaSatisfaccion {
 
 	private HashMap<String, Medida> medidasT1 = new HashMap<String, Medida>();
 	private HashMap<String, Medida> medidasT2 = new HashMap<String, Medida>();
@@ -38,7 +42,7 @@ public class Satisfaccion {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Satisfaccion window = new Satisfaccion();
+					VentanaSatisfaccion window = new VentanaSatisfaccion();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,7 +54,7 @@ public class Satisfaccion {
 	/**
 	 * Create the application.
 	 */
-	public Satisfaccion() {
+	public VentanaSatisfaccion() {
 		this.satisfaccionT1 = 0;
 		this.satisfaccionT2 = 0;
 		

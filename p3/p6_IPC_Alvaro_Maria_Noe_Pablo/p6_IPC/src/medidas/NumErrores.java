@@ -1,10 +1,12 @@
-package p6_IPC;
+package medidas;
 
-public class Errores extends Medida {
+import misc.Tarea;
+
+public class NumErrores extends Medida {
 	
 	private int nErrores;
 
-    public Errores(String id, String nombre, Tarea tarea, double optimo,
+    public NumErrores(String id, String nombre, Tarea tarea, double optimo,
     			   double objetivo, double peorAceptable) {
         super(id, nombre, tarea, optimo, objetivo, peorAceptable);
         this.nErrores = 0;

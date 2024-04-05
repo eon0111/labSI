@@ -1,4 +1,6 @@
-package p6_IPC;
+package medidas;
+
+import misc.Tarea;
 
 public abstract class Medida {
 	

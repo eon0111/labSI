@@ -1,6 +1,9 @@
-package p6_IPC;
+package medidas;
 
 import java.util.ArrayList;
+
+import misc.Interaccion;
+import misc.Tarea;
 
 public class VelocidadTarea extends Medida {
 

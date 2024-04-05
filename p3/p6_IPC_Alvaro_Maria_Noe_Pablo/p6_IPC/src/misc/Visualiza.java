@@ -1,4 +1,4 @@
-package p6_IPC;
+package misc;
 
 import java.io.File;
 import java.io.IOException;
