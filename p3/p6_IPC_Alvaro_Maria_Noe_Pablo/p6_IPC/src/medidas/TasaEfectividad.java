@@ -25,8 +25,8 @@ public class TasaEfectividad extends Medida {
         for (Interaccion i: completadas)
             if (objetivos.contains(i))
                 numObjCompletados++;
-
-        setMedida(numObjCompletados / objetivos.size());
+        
+        setMedida((double)numObjCompletados / (double)objetivos.size());
     }
     
 }

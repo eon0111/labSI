@@ -9,6 +9,8 @@ public class Tarea {
 	private String enunciado; //lo que debe conseguir
 	private ArrayList<Interaccion> listaInteraccionesObjetivo;
 	private ArrayList<Interaccion> listaInteraccionesCompletadas;
+	private double tInicio;
+	private double tFin;
 	
 	public Tarea(String identificador, String usuario, String enunciado) {
 		this.identificador = identificador;
@@ -56,6 +58,22 @@ public class Tarea {
 	
 	public ArrayList<Interaccion> getListaInteraccionesCompletadas() {
 		return listaInteraccionesCompletadas;
+	}
+	
+	public double getTInicio () {
+		return tInicio;
+	}
+	
+	public void setTInicio () {
+		this.tInicio = System.currentTimeMillis();
+	}
+	
+	public double getTFin () {
+		return tFin;
+	}
+	
+	public void setTFin () {
+		this.tFin = System.currentTimeMillis();
 	}
 	
 }

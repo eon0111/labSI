@@ -1038,6 +1038,7 @@ public class Editor implements ActionListener {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				tareaActual = IndiceTarea.TAREA_1;
+				tarea1.setTInicio();
 			}
 		});
 		btnTarea1.addActionListener(new ActionListener() {
@@ -1047,15 +1048,17 @@ public class Editor implements ActionListener {
 		
 		/************************** Boton Tarea 2 *****************************/
 		btnTarea2 = new JButton("Tarea 2");
-		btnTarea1.setToolTipText(ENUNCIADO_TAREA_2);
+		btnTarea2.setToolTipText(ENUNCIADO_TAREA_2);
 		toolBar_1.add(btnTarea2);
-		btnTarea1.addMouseListener(new MouseAdapter() {
+		btnTarea2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				tareaActual = IndiceTarea.TAREA_2;
+				tarea2.setTInicio();
+				tarea1.setTFin();
 			}
 		});
-		btnTarea1.addActionListener(new ActionListener() {
+		btnTarea2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
@@ -1068,9 +1071,11 @@ public class Editor implements ActionListener {
 		btnFin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				tarea2.setTFin();
+				
 				VentanaSatisfaccion ventanaSatisfaccion = new VentanaSatisfaccion();
 				
-				// TODO: quitar este TODO, es una referencia en el código
+				// TODO (quitar)
 				
 				/* Calculo de metricas de usabilidad y generacion de graficas */
 				/******************* TIEMPO DE REALIZACION *********************/
@@ -1078,6 +1083,9 @@ public class Editor implements ActionListener {
 				ventanaSatisfaccion.addMedida(tiempoTareaT1.getId(), tiempoTareaT1, IndiceTarea.TAREA_1);
 				tiempoTareaT2.calculaMedida();
 				ventanaSatisfaccion.addMedida(tiempoTareaT2.getId(), tiempoTareaT2, IndiceTarea.TAREA_2);
+				
+				// TODO (quitar)
+				System.out.println("[*] tiempoT1 = " + tiempoTareaT1.getMedida() + "\ttiempoT2 = " + tiempoTareaT2.getMedida() + "\n");
 				
 				/********************** No. DE ERRORES ************************/
 				ventanaSatisfaccion.addMedida(nErroresT1.getId(), nErroresT1, IndiceTarea.TAREA_1);
@@ -1089,14 +1097,19 @@ public class Editor implements ActionListener {
 				tasaEfectividadT2.calculaMedida();
 				ventanaSatisfaccion.addMedida(tasaEfectividadT2.getId(), tasaEfectividadT2, IndiceTarea.TAREA_2);
 				
+				// TODO (quitar)
+				System.out.println("[*] efectividadT1 = " + tasaEfectividadT1.getMedida() + "\tefectividadT2 = " + tasaEfectividadT2.getMedida() + "\n");
+				
 				/****************** VELOCIDAD DE REALIZACION ******************/
 				velocidadT1.calculaMedida();
 				ventanaSatisfaccion.addMedida(velocidadT1.getId(), velocidadT1, IndiceTarea.TAREA_1);
 				velocidadT2.calculaMedida();
 				ventanaSatisfaccion.addMedida(velocidadT2.getId(), velocidadT2, IndiceTarea.TAREA_2);
 				
+				System.out.println("[*] velocidadT1 = " + velocidadT1.getMedida() + "\tvelocidadT2 = " + velocidadT2.getMedida() + "\n");
+				
 				ventanaSatisfaccion.visible();
-				frmMicroissantW.dispose();
+//				frmMicroissantW.dispose();
 			}
 		});
 		btnTarea2.addActionListener(new ActionListener() {
@@ -1323,23 +1336,25 @@ public class Editor implements ActionListener {
 	 * tarea concreta, y el texto sobre el que la interaccion se lleva a cabo.
 	 */
 	private void procesaInteraccion(IndiceTarea i, Tarea t, String idInt) {
-		if (tareaActual == i) {
-			doc = textArea.getStyledDocument();
-			inicioSeleccion = textArea.getSelectionStart();
-			finSeleccion = textArea.getSelectionEnd();
-								
-			try {
-				t.completaObjetivo(
-						new Interaccion(idInt, nombreUsuario,
-								doc.getText(inicioSeleccion, finSeleccion),
-								System.currentTimeMillis()));
-			} catch (BadLocationException e1) {
-				e1.printStackTrace();
+		if (tareaActual != null) {
+			if (tareaActual == i) {
+				doc = textArea.getStyledDocument();
+				inicioSeleccion = textArea.getSelectionStart();
+				finSeleccion = textArea.getSelectionEnd();
+									
+				try {
+					t.completaObjetivo(
+							new Interaccion(idInt, nombreUsuario,
+									doc.getText(inicioSeleccion, finSeleccion),
+									System.currentTimeMillis()));
+				} catch (BadLocationException e1) {
+					e1.printStackTrace();
+				}
+			} else {
+				/* Si se lleva a cabo una interaccion no objetivo al realizar una
+				 * tarea se contabiliza el error */
+				listaErrores.get(tareaActual.ordinal()).addError();
 			}
-		} else {
-			/* Si se lleva a cabo una interaccion no objetivo al realizar una
-			 * tarea se contabiliza el error */
-			listaErrores.get(tareaActual.ordinal()).addError();
 		}
 	}
 	

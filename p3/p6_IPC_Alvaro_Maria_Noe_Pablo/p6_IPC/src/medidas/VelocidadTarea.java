@@ -17,7 +17,7 @@ public class VelocidadTarea extends Medida {
         double tiempoIni = completadas.get(0).getTiempoMilisegundos();
         double tiempoFin = completadas.get(completadas.size() - 1).getTiempoMilisegundos();
         double tiempo = tiempoFin - tiempoIni;
-        setMedida(getTarea().getListaInteraccionesObjetivo().size() / tiempo);
+        setMedida((double)getTarea().getListaInteraccionesObjetivo().size() / tiempo);
     }
     
 }

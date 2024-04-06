@@ -27,8 +27,8 @@ import javax.swing.JButton;
 
 public class VentanaSatisfaccion {
 
-	private HashMap<String, Medida> medidasT1 = new HashMap<String, Medida>();
-	private HashMap<String, Medida> medidasT2 = new HashMap<String, Medida>();
+	private HashMap<String, Medida> medidasT1;
+	private HashMap<String, Medida> medidasT2;
 	
 	private int satisfaccionT1;
 	private int satisfaccionT2;
@@ -55,6 +55,9 @@ public class VentanaSatisfaccion {
 	 * Create the application.
 	 */
 	public VentanaSatisfaccion() {
+		medidasT1 = new HashMap<String, Medida>();
+		medidasT2 = new HashMap<String, Medida>();
+		
 		this.satisfaccionT1 = 0;
 		this.satisfaccionT2 = 0;
 		
@@ -129,8 +132,11 @@ public class VentanaSatisfaccion {
 			public void mouseClicked(MouseEvent e) {
 				satisfaccionT1 = sliderT1.getValue();
 				satisfaccionT2 = sliderT2.getValue();
-
+				
+				// TODO (quitar)
+				
 				generaGraficas();
+				frame.dispose();
 			}
 		});
 		btnAceptar.addActionListener(new ActionListener() {
@@ -221,16 +227,6 @@ public class VentanaSatisfaccion {
 		lbl10_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lbl10_1_1.setBounds(460, 74, 14, 14);
 		frame.getContentPane().add(lbl10_1_1);
-		
-		JTextArea txtrGrficasGeneradasCon = new JTextArea();
-		txtrGrficasGeneradasCon.setEditable(false);
-		txtrGrficasGeneradasCon.setBackground(SystemColor.menu);
-		txtrGrficasGeneradasCon.setFont(new Font("Arial", Font.PLAIN, 13));
-		txtrGrficasGeneradasCon.setText("Gráficas generadas con éxito");
-		txtrGrficasGeneradasCon.setBounds(114, 226, 186, 22);
-		frame.getContentPane().add(txtrGrficasGeneradasCon);
-		
-		
 	}
 	
 	public void visible () {

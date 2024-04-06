@@ -48,4 +48,16 @@ public class Interaccion {
 		Date date = new Date();
 		this.tiempoMilisegundos = date.getTime();
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		else if (!(o instanceof Interaccion) || o == null)
+			return false;
+		else if (((Interaccion)o).getIdentificador().equals(this.identificador))
+			return true;
+		else return false;
+	}
+	
 }
