@@ -1091,6 +1091,9 @@ public class Editor implements ActionListener {
 				ventanaSatisfaccion.addMedida(nErroresT1.getId(), nErroresT1, IndiceTarea.TAREA_1);
 				ventanaSatisfaccion.addMedida(nErroresT2.getId(), nErroresT2, IndiceTarea.TAREA_2);
 				
+				// TODO (quitar)
+				System.out.println("[*] erroresT1 = " + nErroresT1.getMedida() + "\terroresT2 = " + nErroresT2.getMedida() + "\n");
+				
 				/******************** TASA DE EFECTIVIDAD *********************/
 				tasaEfectividadT1.calculaMedida();
 				ventanaSatisfaccion.addMedida(tasaEfectividadT1.getId(), tasaEfectividadT1, IndiceTarea.TAREA_1);
@@ -1106,10 +1109,11 @@ public class Editor implements ActionListener {
 				velocidadT2.calculaMedida();
 				ventanaSatisfaccion.addMedida(velocidadT2.getId(), velocidadT2, IndiceTarea.TAREA_2);
 				
+				// TODO (quitar)
 				System.out.println("[*] velocidadT1 = " + velocidadT1.getMedida() + "\tvelocidadT2 = " + velocidadT2.getMedida() + "\n");
 				
 				ventanaSatisfaccion.visible();
-//				frmMicroissantW.dispose();
+				frmMicroissantW.dispose();
 			}
 		});
 		btnTarea2.addActionListener(new ActionListener() {

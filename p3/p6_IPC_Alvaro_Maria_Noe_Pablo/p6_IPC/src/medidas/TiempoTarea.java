@@ -6,6 +6,8 @@ import misc.Interaccion;
 import misc.Tarea;
 
 public class TiempoTarea extends Medida {
+	
+	private final static double MS_A_S = 1000;
     
     public TiempoTarea (String id, String nombre, Tarea tarea, double optimo,
     					double objetivo, double peorAceptable) {
@@ -28,7 +30,7 @@ public class TiempoTarea extends Medida {
     	else
     		tFin = completadas.get(completadas.size() - 1).getTiempoMilisegundos(); 
     		
-        this.setMedida(tFin - getTarea().getTInicio());
+        this.setMedida((tFin - getTarea().getTInicio()) / MS_A_S);
     }
     
 }

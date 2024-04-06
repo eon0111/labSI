@@ -12,12 +12,23 @@ public class VelocidadTarea extends Medida {
         super(id, nombre, tarea, optimo, objetivo, peorAceptable);
     }
 
-    public void calcularMedida () {
-    	ArrayList<Interaccion> completadas = getTarea().getListaInteraccionesCompletadas(); 
-        double tiempoIni = completadas.get(0).getTiempoMilisegundos();
-        double tiempoFin = completadas.get(completadas.size() - 1).getTiempoMilisegundos();
-        double tiempo = tiempoFin - tiempoIni;
-        setMedida((double)getTarea().getListaInteraccionesObjetivo().size() / tiempo);
+    public void calculaMedida () {
+    	ArrayList<Interaccion> completadas = getTarea().getListaInteraccionesCompletadas();
+    	
+    	double tIni = (completadas.size() >= 1) ? completadas.get(0).getTiempoMilisegundos() : 0;
+    	double tFin;
+    	double tiempo;
+    	
+    	if (completadas.size() == 1)
+    		tFin = getTarea().getTFin();
+    	else if (completadas.size() > 1)
+    		tFin = completadas.get(completadas.size() - 1).getTiempoMilisegundos();
+    	else
+    		tFin = 1;
+    	
+    	tiempo = tFin - tIni;
+        
+        setMedida(getTarea().getListaInteraccionesCompletadas().size() / tiempo);
     }
     
 }

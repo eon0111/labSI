@@ -20,11 +20,15 @@ public class TasaEfectividad extends Medida {
     public void calculaMedida () {
         ArrayList<Interaccion> completadas = getTarea().getListaInteraccionesCompletadas();
         ArrayList<Interaccion> objetivos = getTarea().getListaInteraccionesObjetivo();
+        ArrayList<Interaccion> comprobadas = new ArrayList<Interaccion>();
+        
         int numObjCompletados = 0;
         
-        for (Interaccion i: completadas)
-            if (objetivos.contains(i))
+        for (Interaccion i: completadas) {
+            if (objetivos.contains(i) && !comprobadas.contains(i))
                 numObjCompletados++;
+            comprobadas.add(i);
+        }
         
         setMedida((double)numObjCompletados / (double)objetivos.size());
     }
