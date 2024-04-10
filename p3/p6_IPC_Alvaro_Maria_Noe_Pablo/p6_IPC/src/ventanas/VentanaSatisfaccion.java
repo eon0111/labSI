@@ -133,8 +133,6 @@ public class VentanaSatisfaccion {
 				satisfaccionT1 = sliderT1.getValue();
 				satisfaccionT2 = sliderT2.getValue();
 				
-				// TODO (quitar)
-				
 				generaGraficas();
 				frame.dispose();
 			}

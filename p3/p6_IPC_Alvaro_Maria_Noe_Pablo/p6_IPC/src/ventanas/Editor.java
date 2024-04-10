@@ -1075,8 +1075,6 @@ public class Editor implements ActionListener {
 				
 				VentanaSatisfaccion ventanaSatisfaccion = new VentanaSatisfaccion();
 				
-				// TODO (quitar)
-				
 				/* Calculo de metricas de usabilidad y generacion de graficas */
 				/******************* TIEMPO DE REALIZACION *********************/
 				tiempoTareaT1.calculaMedida();
@@ -1084,15 +1082,9 @@ public class Editor implements ActionListener {
 				tiempoTareaT2.calculaMedida();
 				ventanaSatisfaccion.addMedida(tiempoTareaT2.getId(), tiempoTareaT2, IndiceTarea.TAREA_2);
 				
-				// TODO (quitar)
-				System.out.println("[*] tiempoT1 = " + tiempoTareaT1.getMedida() + "\ttiempoT2 = " + tiempoTareaT2.getMedida() + "\n");
-				
 				/********************** No. DE ERRORES ************************/
 				ventanaSatisfaccion.addMedida(nErroresT1.getId(), nErroresT1, IndiceTarea.TAREA_1);
 				ventanaSatisfaccion.addMedida(nErroresT2.getId(), nErroresT2, IndiceTarea.TAREA_2);
-				
-				// TODO (quitar)
-				System.out.println("[*] erroresT1 = " + nErroresT1.getMedida() + "\terroresT2 = " + nErroresT2.getMedida() + "\n");
 				
 				/******************** TASA DE EFECTIVIDAD *********************/
 				tasaEfectividadT1.calculaMedida();
@@ -1100,17 +1092,11 @@ public class Editor implements ActionListener {
 				tasaEfectividadT2.calculaMedida();
 				ventanaSatisfaccion.addMedida(tasaEfectividadT2.getId(), tasaEfectividadT2, IndiceTarea.TAREA_2);
 				
-				// TODO (quitar)
-				System.out.println("[*] efectividadT1 = " + tasaEfectividadT1.getMedida() + "\tefectividadT2 = " + tasaEfectividadT2.getMedida() + "\n");
-				
 				/****************** VELOCIDAD DE REALIZACION ******************/
 				velocidadT1.calculaMedida();
 				ventanaSatisfaccion.addMedida(velocidadT1.getId(), velocidadT1, IndiceTarea.TAREA_1);
 				velocidadT2.calculaMedida();
 				ventanaSatisfaccion.addMedida(velocidadT2.getId(), velocidadT2, IndiceTarea.TAREA_2);
-				
-				// TODO (quitar)
-				System.out.println("[*] velocidadT1 = " + velocidadT1.getMedida() + "\tvelocidadT2 = " + velocidadT2.getMedida() + "\n");
 				
 				ventanaSatisfaccion.visible();
 				frmMicroissantW.dispose();
