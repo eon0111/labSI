@@ -2,51 +2,54 @@ package com.example.centrocivico;
 
 import android.annotation.SuppressLint;
 
+import androidx.annotation.NonNull;
+
 import java.time.LocalDateTime;
 import java.util.Date;
 
 public class UbicacionCaida {
 
-    private long latitud;
-    private long longitud;
-    private LocalDateTime instante;
+    private String latitud;
+    private String longitud;
+    private String instante;
 
     public UbicacionCaida() {
 
     }
 
     @SuppressLint("NewApi")
-    public UbicacionCaida(long latitud, long longitud) {
+    public UbicacionCaida(String latitud, String longitud) {
         this.latitud = latitud;
         this.longitud = longitud;
-        this.instante = LocalDateTime.now();
+        this.instante = LocalDateTime.now().toString();
     }
 
-    public long getLatitud() {
+    public String getLatitud() {
         return latitud;
     }
 
-    public void setLatitud(long latitud) {
+    public void setLatitud(String latitud) {
         this.latitud = latitud;
     }
 
-    public long getLongitud() {
+    public String getLongitud() {
         return longitud;
     }
 
-    public void setLongitud(long longitud) {
+    public void setLongitud(String longitud) {
         this.longitud = longitud;
     }
 
-    public LocalDateTime getInstante() {
+    public String getInstante() {
         return instante;
     }
 
-    public void setInstante(LocalDateTime instante) {
+    public void setInstante(String instante) {
         this.instante = instante;
     }
 
+    @NonNull
     public String toString() {
-        return "Latitud: " + this.latitud + "\nLongitud: " + this.longitud + "\nInstante: " + this.instante.toString() + "\n";
+        return "Latitud: " + this.latitud + "\nLongitud: " + this.longitud + "\nInstante: " + this.instante + "\n";
     }
 }

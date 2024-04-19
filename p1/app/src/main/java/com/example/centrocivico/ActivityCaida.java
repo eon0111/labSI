@@ -25,6 +25,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class ActivityCaida extends AppCompatActivity implements SensorEventListener, LocationListener {
 
@@ -45,6 +47,8 @@ public class ActivityCaida extends AppCompatActivity implements SensorEventListe
 	 * La localización del usuario.
 	 */
 	private Location loc;
+
+	private DatabaseReference mDatabase;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +123,8 @@ public class ActivityCaida extends AppCompatActivity implements SensorEventListe
 				return false;
 			}
 		});
+
+		mDatabase = FirebaseDatabase.getInstance().getReference();
 	}
 
 	/**
@@ -148,6 +154,12 @@ public class ActivityCaida extends AppCompatActivity implements SensorEventListe
 			texto_estado_usuario.setText("CAÍDA");
 			crearNotificacion();
 		}
+	}
+
+	public void writeNewUbicacion (String userId, String latitud, String longitud) {
+		UbicacionCaida ubicacion = new UbicacionCaida(latitud, longitud);
+		String key = mDatabase.child(userId).child("ubicaciones").push().getKey();
+		mDatabase.child(userId).child("ubicaciones").child(key).setValue(ubicacion);
 	}
 
 	/**
@@ -211,6 +223,11 @@ public class ActivityCaida extends AppCompatActivity implements SensorEventListe
 
 		/* Muestra la notificación */
 		notificationManager.notify(96, builder.build());
+
+		TextView textoLatitud = findViewById(R.id.caidasLatitudUsuario);
+		TextView textoLongitud = findViewById(R.id.caidasLongitudUsuario);
+
+		writeNewUbicacion("pepito", textoLatitud.getText().toString(), textoLongitud.getText().toString());
 	}
 
 
