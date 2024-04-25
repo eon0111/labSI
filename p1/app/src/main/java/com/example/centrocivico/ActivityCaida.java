@@ -18,6 +18,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -29,6 +30,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ActivityCaida extends AppCompatActivity implements SensorEventListener, LocationListener {
+
+	private boolean caido;
 
 	/**
 	 * Constantes para acceder al array de datos del sensor de aceleración.
@@ -52,6 +55,8 @@ public class ActivityCaida extends AppCompatActivity implements SensorEventListe
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		caido = false;
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_caidas);
 
@@ -134,6 +139,7 @@ public class ActivityCaida extends AppCompatActivity implements SensorEventListe
 	 *
 	 * @param event El evento empleado en las comunicaciones con el sensor de aceleración
 	 */
+
 	@SuppressLint({"SetTextI18n", "DefaultLocale"})
 	@Override
 	public void onSensorChanged(SensorEvent event) {
@@ -150,7 +156,8 @@ public class ActivityCaida extends AppCompatActivity implements SensorEventListe
 		txt_val_accel_y.setText(String.format("%.3f", accel_y));
 		txt_val_accel_z.setText(String.format("%.3f", accel_z));
 
-		if (accel_x > ACCEL_TRIGGER || accel_y > ACCEL_TRIGGER || accel_z > ACCEL_TRIGGER) {
+		if (!caido && (accel_x > ACCEL_TRIGGER || accel_y > ACCEL_TRIGGER || accel_z > ACCEL_TRIGGER)) {
+			caido = true;
 			texto_estado_usuario.setText("CAÍDA");
 			crearNotificacion();
 		}

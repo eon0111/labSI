@@ -17,19 +17,23 @@
         android:theme="@style/Theme.CentroCivico"
         tools:targetApi="31">
         <activity
-            android:name=".ActivityListado"
-            android:exported="false"
-            android:label="@string/title_activity_listado"
-            android:theme="@style/Theme.CentroCivico" />
-        <activity
-            android:name=".ActivityInicio"
-            android:exported="true">
+            android:name=".ActivityLogin"
+            android:exported="true"
+            android:noHistory="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ActivityInicio"
+            android:exported="true"
+            android:noHistory="false" />
+        <activity
+            android:name=".ActivityListado"
+            android:exported="false"
+            android:noHistory="true" />
         <activity
             android:name=".ActivityCaida"
             android:exported="false"
