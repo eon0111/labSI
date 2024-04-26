@@ -18,7 +18,7 @@ public class UbicacionAdapter extends ArrayAdapter<UbicacionCaida> {
         UbicacionCaida ubicacion = getItem(position);
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_ubicacion, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_lista_caidas, parent, false);
         }
 
         TextView tvUbicacion = (TextView) convertView.findViewById(R.id.tvUbicacion);

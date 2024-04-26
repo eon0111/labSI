@@ -23,7 +23,7 @@ public class ActivityListado extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.item_ubicacion);
+        setContentView(R.layout.activity_lista_caidas);
     }
 
     private void registraOyenteNodos() {
