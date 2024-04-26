@@ -18,39 +18,74 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/loginInputUsuario"
-        app:layout_constraintBottom_toTopOf=TODO/>
+        app:layout_constraintBottom_toTopOf="@id/loginTituloContrasenha"/>
     
-    <com.google.android.material.textfield.TextInputEditText
+    <EditText
         android:id="@+id/loginInputUsuario"
-        android:layout_width="30dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginRight="50dp"
 
         app:layout_constraintTop_toTopOf="@id/loginTituloUsuario"
-        app:layout_constraintStart_toEndOf="@id/loginTituloUsuario"
+        app:layout_constraintStart_toStOf="@id/loginTituloUsuario"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/loginTituloUsuario"/>
+        app:layout_constraintBottom_toBottomOf="@id/loginTituloUsuario"/>
 
     <TextView
         android:id="@+id/loginTituloContrasenha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
 
         android:text="Contraseña:"
         android:textSize="8pt"
 
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loginTituloUsuario"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/loginInputContrasenha"
-        app:layout_constraintBottom_toTopOf=TODO/>
+        app:layout_constraintEnd_toEndOf="@id/loginTituloUsuario"
+        app:layout_constraintBottom_toTopOf="@id/loginBotonRegistro"/>
 
-    <com.google.android.material.textfield.TextInputEditText
+    <EditText
         android:id="@+id/loginInputContrasenha"
-        android:layout_width="30dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="50dp"
+
+        android:inputType="textPassword"
+        android:textSize="8pt"
+
+        app:layout_constraintBottom_toBottomOf="@id/loginTituloContrasenha"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/loginInputUsuario"
+        app:layout_constraintTop_toTopOf="@id/loginTituloContrasenha" />
+
+    <Button
+        android:id="@+id/loginBotonRegistro"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/loginTituloUsuario"
+        android:textSize="8pt"
+        android:text="Registro"
+
+        app:layout_constraintTop_toBottomOf="@id/loginTituloContrasenha"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/loginBotonLogin"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <Button
+        android:id="@+id/loginBotonLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+
+        android:textSize="10pt"
+        android:background="@color/uc"
+        android:text="Acceder"
+
+        app:layout_constraintTop_toTopOf="@id/loginBotonRegistro"
+        app:layout_constraintStart_toEndOf="@id/loginBotonRegistro"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf=TODO/>
+        app:layout_constraintBottom_toBottomOf="@id/loginBotonRegistro"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
