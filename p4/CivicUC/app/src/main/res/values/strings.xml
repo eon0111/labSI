@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">CivicUC</string>
+    <string name="title_inicio">Inicio</string>
+    <string name="title_actividades">Actividades</string>
+    <string name="title_caida">Alerta</string>
+    <string name="title_listado">Caídas</string>
+    <string name="title_chat">Chat</string>
+</resources>

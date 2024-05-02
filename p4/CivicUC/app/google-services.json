@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "123653216314",
+    "firebase_url": "https://groupware-976d6-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "groupware-976d6",
+    "storage_bucket": "groupware-976d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123653216314:android:20ced8af0ebfb64c4c7d03",
+        "android_client_info": {
+          "package_name": "com.example.centrocivico"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfrVaF1F9HYeRvm7Aj_ePIeui2M9hqo30"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123653216314:android:fb915649746ea6f84c7d03",
+        "android_client_info": {
+          "package_name": "com.example.civicuc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfrVaF1F9HYeRvm7Aj_ePIeui2M9hqo30"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
