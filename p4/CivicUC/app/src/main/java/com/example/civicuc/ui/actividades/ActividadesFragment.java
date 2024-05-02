@@ -60,13 +60,15 @@ public class ActividadesFragment extends Fragment implements SensorEventListener
      * @param event El evento empleado en las comunicaciones con el sensor de proximidad
      */
     public void onSensorChanged(SensorEvent event) {
-        if(event.values[0] == 0) {
-            visualiza("Sala 1: juego libre Jugger\n" +
-                    "Sala 2: torneo de Mario Kart\n" +
-                    "Sala 3: clase de inglés\n" +
-                    "Sala 4: ensayo de coro juvenil");
-        } else{
-            visualiza("");
+        if (binding != null) {
+            if (event.values[0] == 0) {
+                visualiza("Sala 1: juego libre Jugger\n" +
+                        "Sala 2: torneo de Mario Kart\n" +
+                        "Sala 3: clase de inglés\n" +
+                        "Sala 4: ensayo de coro juvenil");
+            } else {
+                visualiza("");
+            }
         }
     }
 
