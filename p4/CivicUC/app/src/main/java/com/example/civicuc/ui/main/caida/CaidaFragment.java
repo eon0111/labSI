@@ -1,4 +1,4 @@
-package com.example.civicuc.ui.caida;
+package com.example.civicuc.ui.main.caida;
 
 import static android.content.Context.SENSOR_SERVICE;
 
@@ -26,13 +26,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.civicuc.MainActivity;
 import com.example.civicuc.R;
 import com.example.civicuc.databinding.FragmentCaidaBinding;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class CaidaFragment extends Fragment implements SensorEventListener, LocationListener {
 
@@ -56,20 +53,11 @@ public class CaidaFragment extends Fragment implements SensorEventListener, Loca
      */
     private Location loc;
 
-    /**
-     * Referencia a la base de datos de Firebase
-     */
-    private DatabaseReference mDatabase;
-
     private FragmentCaidaBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        CaidaViewModel caidaViewModel =
-                new ViewModelProvider(this).get(CaidaViewModel.class);
-
         binding = FragmentCaidaBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
 
         /*
          * Configuración del sensor de aceleración.
@@ -113,12 +101,7 @@ public class CaidaFragment extends Fragment implements SensorEventListener, Loca
          */
         crearCanalComunicacion();
 
-        /*
-         * Conexión a la base de datos
-         */
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        return root;
+        return binding.getRoot();
     }
 
     @Override
@@ -151,18 +134,6 @@ public class CaidaFragment extends Fragment implements SensorEventListener, Loca
                 crearNotificacion();
             }
         }
-    }
-
-    /**
-     * Registra una nueva caída en la base de datos.
-     * @param userId el ID del usuario accidentado
-     * @param latitud el valor de latitud de su ubicación
-     * @param longitud el valor de longitud de su ubicación
-     */
-    public void writeNewUbicacion (String userId, String latitud, String longitud) {
-        UbicacionCaida ubicacion = new UbicacionCaida(latitud, longitud);
-        String key = mDatabase.child(userId).child("ubicaciones").push().getKey();
-        mDatabase.child(userId).child("ubicaciones").child(key).setValue(ubicacion);
     }
 
     /**
@@ -231,6 +202,24 @@ public class CaidaFragment extends Fragment implements SensorEventListener, Loca
                           binding.caidasLongitudUsuario.getText().toString());
     }
 
+    /**
+     * Registra una nueva caída en la base de datos.
+     * @param userId el ID del usuario accidentado
+     * @param latitud el valor de latitud de su ubicación
+     * @param longitud el valor de longitud de su ubicación
+     */
+    public void writeNewUbicacion (String userId, String latitud, String longitud) {
+        UbicacionCaida ubicacion = new UbicacionCaida(latitud, longitud);
+        String key = ((MainActivity)getActivity()).getDatabase()
+                                                  .child(userId)
+                                                  .child("ubicaciones")
+                                                  .push().getKey();
+        ((MainActivity)getActivity()).getDatabase()
+                                     .child(userId)
+                                     .child("ubicaciones")
+                                     .child(key)
+                                     .setValue(ubicacion);
+    }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) { }

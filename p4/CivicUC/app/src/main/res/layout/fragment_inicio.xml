@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_marginBottom="?android:attr/actionBarSize"
     android:id="@+id/fragment_inicio"
-    tools:context=".ui.inicio.InicioFragment">
+    tools:context=".ui.main.inicio.InicioFragment">
 
     <TextView
         android:id="@+id/tituloMainActivity"

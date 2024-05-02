@@ -1,4 +1,4 @@
-package com.example.civicuc.ui.inicio;
+package com.example.civicuc.ui.main.inicio;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

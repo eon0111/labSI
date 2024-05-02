@@ -1,4 +1,4 @@
-package com.example.civicuc.ui.chat;
+package com.example.civicuc.ui.main.chat;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.civicuc.databinding.FragmentChatBinding;
 
@@ -18,15 +17,10 @@ public class ChatFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        ChatViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(ChatViewModel.class);
 
         binding = FragmentChatBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
 
-        final TextView textView = binding.textChat;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
+        return binding.getRoot();
     }
 
     @Override
@@ -34,4 +28,5 @@ public class ChatFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 }

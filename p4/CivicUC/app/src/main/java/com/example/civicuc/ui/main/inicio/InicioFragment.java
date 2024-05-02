@@ -1,4 +1,4 @@
-package com.example.civicuc.ui.inicio;
+package com.example.civicuc.ui.main.inicio;
 
 import static android.content.Context.SENSOR_SERVICE;
 
@@ -8,15 +8,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.civicuc.databinding.FragmentInicioBinding;
-import com.example.civicuc.ui.caida.CaidaFragment;
 
 import java.util.List;
 
@@ -26,9 +22,6 @@ public class InicioFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        InicioViewModel inicioViewModel =
-                new ViewModelProvider(this).get(InicioViewModel.class);
-
         binding = FragmentInicioBinding.inflate(inflater, container, false);
 
         /* Muestra todos los sensores accesibles en el dispositivo, en el cuadro de texto de la

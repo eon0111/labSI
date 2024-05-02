@@ -1,4 +1,4 @@
-package com.example.civicuc.ui.caida;
+package com.example.civicuc.ui.main.caida;
 
 import android.annotation.SuppressLint;
 
@@ -12,11 +12,8 @@ public class UbicacionCaida {
     private String longitud;
     private String instante;
 
-    public UbicacionCaida() {
+    public UbicacionCaida() { }
 
-    }
-
-    @SuppressLint("NewApi")
     public UbicacionCaida(String latitud, String longitud) {
         this.latitud = latitud;
         this.longitud = longitud;

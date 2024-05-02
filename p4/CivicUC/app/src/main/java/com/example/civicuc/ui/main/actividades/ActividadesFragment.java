@@ -1,4 +1,4 @@
-package com.example.civicuc.ui.actividades;
+package com.example.civicuc.ui.main.actividades;
 
 import static android.content.Context.*;
 
@@ -25,11 +25,7 @@ public class ActividadesFragment extends Fragment implements SensorEventListener
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        ActividadesViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(ActividadesViewModel.class);
-
         binding = FragmentActividadesBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
 
         /*
          * Configuración del sensor de proximidad.
@@ -42,9 +38,7 @@ public class ActividadesFragment extends Fragment implements SensorEventListener
                     SensorManager.SENSOR_DELAY_UI);
         }
 
-        // final TextView textView = binding.textActividades;
-        // dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
+        return binding.getRoot();
     }
 
     @Override

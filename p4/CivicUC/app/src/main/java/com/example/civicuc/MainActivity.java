@@ -11,10 +11,17 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.civicuc.databinding.ActivityMainBinding;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+
+    /**
+     * Referencia a la base de datos de Firebase
+     */
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +40,17 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        /* Conexión a la base de datos */
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+    }
+
+    /**
+     * Retorna la referencia a la base de datos de Firebase empleada por la app.
+     * @return la referencia a la base de datos de Firebase empleada por la app
+     */
+    public DatabaseReference getDatabase() {
+        return mDatabase;
     }
 
 }

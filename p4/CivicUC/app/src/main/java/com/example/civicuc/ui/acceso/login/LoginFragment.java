@@ -1,25 +1,26 @@
-package com.example.civicuc.ui.listado;
+package com.example.civicuc.ui.acceso.login;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.civicuc.databinding.FragmentListadoBinding;
+import com.example.civicuc.databinding.FragmentLoginBinding;
 
-public class ListadoFragment extends Fragment {
+public class LoginFragment extends Fragment {
 
-    private FragmentListadoBinding binding;
+    private FragmentLoginBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        LoginViewModel loginViewModel =
+                new ViewModelProvider(this).get(LoginViewModel.class);
 
-        binding = FragmentListadoBinding.inflate(inflater, container, false);
+        binding = FragmentLoginBinding.inflate(inflater, container, false);
 
         return binding.getRoot();
     }
