@@ -6,9 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.civicuc.LoginActivity;
+import com.example.civicuc.databinding.FragmentCaidaBinding;
 import com.example.civicuc.databinding.FragmentLoginBinding;
 
 public class LoginFragment extends Fragment {
@@ -19,7 +22,15 @@ public class LoginFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentLoginBinding.inflate(inflater, container, false);
 
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
 
+        binding.fragmentLoginBotonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                autenticarUsuario(binding.fragmentLoginInputEmail.getText().toString(),
+                                  binding.fragmentLoginInputContrasenha.getText().toString());
+            }
+        });
 
         return binding.getRoot();
     }
@@ -28,5 +39,9 @@ public class LoginFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void autenticarUsuario(String nombre, String contrasenha) {
+        ((LoginActivity)getActivity()).autenticarUsuario(nombre, contrasenha);
     }
 }

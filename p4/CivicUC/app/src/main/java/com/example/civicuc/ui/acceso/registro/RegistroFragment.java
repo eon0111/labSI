@@ -6,8 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.civicuc.databinding.FragmentRegistroBinding;
 
@@ -17,10 +17,9 @@ public class RegistroFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        RegistroViewModel registroViewModel =
-                new ViewModelProvider(this).get(RegistroViewModel.class);
-
         binding = FragmentRegistroBinding.inflate(inflater, container, false);
+
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
 
         return binding.getRoot();
     }

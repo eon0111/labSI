@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -23,24 +25,20 @@ public class BienvenidaFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentBienvenidaBinding.inflate(inflater, container, false);
 
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+
         /* Configura los botones para que redirijan a las interfaces que corresponda */
-        Button boton_login = binding.fragmentBienvenidaBotonLogin;
-        boton_login.setOnClickListener(new View.OnClickListener() {
+        binding.fragmentBienvenidaBotonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_bienvenida, new LoginFragment());
-                fragmentTransaction.commit();
+                reemplazaFragment(new LoginFragment());
             }
         });
 
-        Button boton_registro = binding.fragmentBienvenidaBotonRegistro;
-        boton_login.setOnClickListener(new View.OnClickListener() {
+        binding.fragmentBienvenidaBotonRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_bienvenida, new RegistroFragment());
-                fragmentTransaction.commit();
+                reemplazaFragment(new RegistroFragment());
             }
         });
 
@@ -52,4 +50,19 @@ public class BienvenidaFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    private void reemplazaFragment(Fragment nuevoFragment) {
+        binding.fragmentBienvenidaLogoApp.setVisibility(View.GONE);
+        binding.fragmentBienvenidaNombreApp.setVisibility(View.GONE);
+        binding.fragmentBienvenidaMensajeBienvenidaTitulo.setVisibility(View.GONE);
+        binding.fragmentBienvenidaMensajeBienvenidaContenido.setVisibility(View.GONE);
+        binding.fragmentBienvenidaBotonLogin.setVisibility(View.GONE);
+        binding.fragmentBienvenidaBotonRegistro.setVisibility(View.GONE);
+
+
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_bienvenida, nuevoFragment);
+        fragmentTransaction.commit();
+    }
+
 }

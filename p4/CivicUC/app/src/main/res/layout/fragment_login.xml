@@ -56,26 +56,27 @@
 
         android:text="Login incorrecto"
         android:textColor="@color/error"
+        android:visibility="invisible"
 
         app:layout_constraintTop_toBottomOf="@id/fragment_login_input_contrasenha"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="fragment_login_boton_login" />
+        app:layout_constraintBottom_toTopOf="@+id/fragment_login_boton_login" />
 
     <Button
         android:id="@+id/fragment_login_boton_login"
         android:layout_width="100dp"
         android:layout_height="50dp"
 
-        android:text="Login"
         android:background="@drawable/boton_redondeado"
-        android:textAllCaps="false"
         android:fontFamily="sans-serif"
+        android:text="Login"
+        android:textAllCaps="false"
 
-        app:layout_constraintTop_toBottomOf="@+id/fragment_login_texto_err_login"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_login_texto_err_login" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
