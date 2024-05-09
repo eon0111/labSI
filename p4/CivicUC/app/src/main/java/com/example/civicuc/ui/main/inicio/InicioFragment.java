@@ -11,8 +11,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.civicuc.R;
 import com.example.civicuc.databinding.FragmentInicioBinding;
+import com.example.civicuc.ui.acceso.login.LoginFragment;
+import com.example.civicuc.ui.main.actividades.ActividadesFragment;
+import com.example.civicuc.ui.main.caida.CaidaFragment;
 
 import java.util.List;
 
@@ -30,17 +35,26 @@ public class InicioFragment extends Fragment {
         List<Sensor> listaSensores = sensorManager.getSensorList(Sensor.TYPE_ALL);
         StringBuilder sensores = new StringBuilder();
 
-        for(Sensor sensor: listaSensores) {
-            sensores.append(sensor.getName()).append("\n");
-        }
+        for(Sensor sensor: listaSensores) sensores.append(sensor.getName()).append("\n");
 
         binding.cuadroTexto.setText(sensores.toString());
 
-        /* TODO: Configura la funcionalidad de los botones */
+        /* Configura el comportamiento de los botones para que redirijan a la interfaz que corresponda */
         binding.botonMonitorizarCaidas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO:
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_inicio, new CaidaFragment());
+                fragmentTransaction.commit();
+            }
+        });
+
+        binding.botonMonitorizarPanel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_inicio, new ActividadesFragment());
+                fragmentTransaction.commit();
             }
         });
 

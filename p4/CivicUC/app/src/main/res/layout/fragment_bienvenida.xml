@@ -4,19 +4,101 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/fragment_bienvenida"
     tools:context=".ui.acceso.bienvenida.BienvenidaFragment">
 
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/fragment_bienvenida_logo_app"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        android:scaleX="1.0"
+
+        android:scaleY="1.0"
+        android:src="@drawable/app_logo"
+        app:layout_constraintBottom_toTopOf="@id/fragment_bienvenida_nombre_app"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fragment_bienvenida_nombre_app"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:fontFamily="sans-serif"
+        android:text="@string/app_name"
+        android:textColor="@color/unican"
+        android:textSize="15pt"
+
+        app:layout_constraintTop_toBottomOf="@+id/fragment_bienvenida_logo_app"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_bienvenida_mensaje_bienvenida_titulo"/>
+
+    <TextView
+        android:id="@+id/fragment_bienvenida_mensaje_bienvenida_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+
+        android:fontFamily="sans-serif"
+        android:text="Bienvenido"
+        android:textColor="@color/unican"
+        android:textStyle="bold"
+        android:textSize="15pt"
+
+        app:layout_constraintTop_toBottomOf="@+id/fragment_bienvenida_nombre_app"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/fragment_bienvenida_mensaje_bienvenida_contenido" />
+
+    <TextView
+        android:id="@+id/fragment_bienvenida_mensaje_bienvenida_contenido"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+
+        android:text="¡Bienvenido al Centro Cívico UC! Un lugar donde convergen la comunidad universitaria y la ciudadanía. Explora, aprende y conecta con nosotros"
+        android:textAlignment="center"
+
+        app:layout_constraintTop_toBottomOf="@+id/fragment_bienvenida_mensaje_bienvenida_titulo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/fragment_bienvenida_boton_login"/>
+
+    <Button
+        android:id="@+id/fragment_bienvenida_boton_login"
+        android:layout_width="270dp"
+        android:layout_height="70dp"
+
+        android:text="Login"
+        android:fontFamily="sans-serif"
+        android:textAllCaps="false"
+        android:textSize="10pt"
+        android:background="@drawable/boton_redondeado"
+
+        app:layout_constraintTop_toBottomOf="@id/fragment_bienvenida_mensaje_bienvenida_contenido"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/fragment_bienvenida_boton_registro" />
+
+    <Button
+        android:id="@+id/fragment_bienvenida_boton_registro"
+        android:layout_width="270dp"
+        android:layout_height="70dp"
+
+        android:text="Registro"
+        android:fontFamily="sans-serif"
+        android:textAllCaps="false"
+        android:textSize="10pt"
+        android:background="@drawable/boton_redondeado"
+        android:backgroundTint="@color/white"
+
+        app:layout_constraintTop_toBottomOf="@id/fragment_bienvenida_boton_login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

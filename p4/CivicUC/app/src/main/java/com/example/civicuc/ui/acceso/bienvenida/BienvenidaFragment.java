@@ -4,13 +4,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.civicuc.R;
 import com.example.civicuc.databinding.FragmentBienvenidaBinding;
-import com.example.civicuc.databinding.FragmentWelcomeBinding;
+import com.example.civicuc.ui.acceso.login.LoginFragment;
+import com.example.civicuc.ui.acceso.registro.RegistroFragment;
 
 public class BienvenidaFragment extends Fragment {
 
@@ -18,10 +21,28 @@ public class BienvenidaFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        BienvenidaViewModel bienvenidaViewModel =
-                new ViewModelProvider(this).get(BienvenidaViewModel.class);
-
         binding = FragmentBienvenidaBinding.inflate(inflater, container, false);
+
+        /* Configura los botones para que redirijan a las interfaces que corresponda */
+        Button boton_login = binding.fragmentBienvenidaBotonLogin;
+        boton_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_bienvenida, new LoginFragment());
+                fragmentTransaction.commit();
+            }
+        });
+
+        Button boton_registro = binding.fragmentBienvenidaBotonRegistro;
+        boton_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_bienvenida, new RegistroFragment());
+                fragmentTransaction.commit();
+            }
+        });
 
         return binding.getRoot();
     }

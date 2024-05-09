@@ -4,19 +4,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/fragment_login"
     tools:context=".ui.acceso.login.LoginFragment">
 
-    <TextView
-        android:id="@+id/text_dashboard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/fragment_login_logo_app"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        android:scaleX="1.0"
+        android:scaleY="1.0"
+
+        android:src="@drawable/app_logo"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/fragment_login_input_email" />
+
+    <EditText
+        android:id="@+id/fragment_login_input_email"
+        android:layout_width="270dp"
+        android:layout_height="70dp"
+
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+
+        app:layout_constraintTop_toBottomOf="@+id/fragment_login_logo_app"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_login_input_contrasenha" />
+
+    <EditText
+        android:id="@+id/fragment_login_input_contrasenha"
+        android:layout_width="270dp"
+        android:layout_height="70dp"
+
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+
+        app:layout_constraintTop_toBottomOf="@+id/fragment_login_input_email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_login_texto_err_login" />
+
+    <TextView
+        android:id="@+id/fragment_login_texto_err_login"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+
+        android:text="Login incorrecto"
+        android:textColor="@color/error"
+
+        app:layout_constraintTop_toBottomOf="@id/fragment_login_input_contrasenha"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="fragment_login_boton_login" />
+
+    <Button
+        android:id="@+id/fragment_login_boton_login"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+
+        android:text="Login"
+        android:background="@drawable/boton_redondeado"
+        android:textAllCaps="false"
+        android:fontFamily="sans-serif"
+
+        app:layout_constraintTop_toBottomOf="@+id/fragment_login_texto_err_login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
