@@ -1,5 +1,6 @@
 package com.example.civicuc.ui.acceso.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,15 +9,27 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.example.civicuc.LoginActivity;
-import com.example.civicuc.databinding.FragmentCaidaBinding;
+import com.example.civicuc.MainActivity;
 import com.example.civicuc.databinding.FragmentLoginBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginFragment extends Fragment {
 
     private FragmentLoginBinding binding;
+
+    /**
+     * Referencia a la base de datos de Firebase
+     */
+    private DatabaseReference mDatabase;
+
+    private FirebaseAuth mAuth;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -32,6 +45,9 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        /* Conexión a la base de datos */
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
         return binding.getRoot();
     }
 
@@ -41,7 +57,29 @@ public class LoginFragment extends Fragment {
         binding = null;
     }
 
-    private void autenticarUsuario(String nombre, String contrasenha) {
-        ((LoginActivity)getActivity()).autenticarUsuario(nombre, contrasenha);
+    /**
+     * Autentica un usuario.
+     * @param email el email del usuario
+     * @param contrasenha la contrasenha del usuario
+     */
+    public void autenticarUsuario(String email, String contrasenha) {
+        if (email == null || contrasenha == null) {
+            binding.fragmentLoginTextoErrLogin.setVisibility(View.VISIBLE);
+        } else {
+            mAuth = FirebaseAuth.getInstance();
+            mAuth.signInWithEmailAndPassword(email, contrasenha).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+                        intent.putExtra("usuario", user);
+                        startActivity(intent);
+                    } else {
+                        binding.fragmentLoginTextoErrLogin.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
+        }
     }
 }
