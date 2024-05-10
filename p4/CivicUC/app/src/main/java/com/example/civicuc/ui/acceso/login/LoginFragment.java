@@ -75,6 +75,7 @@ public class LoginFragment extends Fragment {
                         Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
                         intent.putExtra("usuario", user);
                         startActivity(intent);
+                        FirebaseDatabase.getInstance().goOffline();
                     } else {
                         binding.fragmentLoginTextoErrLogin.setVisibility(View.VISIBLE);
                     }

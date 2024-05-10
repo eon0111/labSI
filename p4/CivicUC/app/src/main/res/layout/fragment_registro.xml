@@ -65,16 +65,21 @@
             android:id="@+id/fragment_registro_email"
             android:layout_width="270dp"
             android:layout_height="wrap_content"
-            android:hint="Email"/>
+            android:hint="Email"
+            android:inputType="textEmailAddress"/>
 
         <EditText
             android:id="@+id/fragment_registro_contrasenha"
             android:layout_width="270dp"
             android:layout_height="wrap_content"
-            android:hint="Contraseña"/>
+            android:hint="Contraseña"
+            android:inputType="textPassword"/>
 
-        <
-
+        <EditText
+            android:id="@+id/fragment_registro_nickname"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:hint="Nickname"/>
     </LinearLayout>
 
     <Button

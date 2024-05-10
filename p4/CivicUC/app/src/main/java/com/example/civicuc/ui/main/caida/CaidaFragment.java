@@ -30,6 +30,7 @@ import androidx.fragment.app.Fragment;
 import com.example.civicuc.MainActivity;
 import com.example.civicuc.R;
 import com.example.civicuc.databinding.FragmentCaidaBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class CaidaFragment extends Fragment implements SensorEventListener, LocationListener {
 
@@ -132,6 +133,11 @@ public class CaidaFragment extends Fragment implements SensorEventListener, Loca
                 caido = true;
                 binding.caidasEstadoUsuario.setText("CAÍDA");
                 crearNotificacion();
+
+                /* Registra la caída en la base de datos */
+                writeNewUbicacion(FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),
+                                  binding.caidasLatitudUsuario.getText().toString(),
+                                  binding.caidasLongitudUsuario.getText().toString());
             }
         }
     }
@@ -195,11 +201,6 @@ public class CaidaFragment extends Fragment implements SensorEventListener, Loca
 
         /* Muestra la notificación */
         notificationManager.notify(96, builder.build());
-
-        /* Registra la cída en la base de datos */
-        writeNewUbicacion("pepito",
-                          binding.caidasLatitudUsuario.getText().toString(),
-                          binding.caidasLongitudUsuario.getText().toString());
     }
 
     /**

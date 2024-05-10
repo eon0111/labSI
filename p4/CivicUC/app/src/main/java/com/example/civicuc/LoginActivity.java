@@ -1,8 +1,10 @@
 package com.example.civicuc;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.civicuc.ui.acceso.registro.DatosUsuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -30,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     private DatabaseReference mDatabase;
 
+    /** Referencia al servicio de autenticación de Firebase */
     private FirebaseAuth mAuth;
 
     @Override
@@ -50,7 +53,6 @@ public class LoginActivity extends AppCompatActivity {
 
         /* Conexión a la base de datos */
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
     }
 
     /**
@@ -62,28 +64,29 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * Desconecta el aplicativo de la base de datos de Firebase.
-     */
-    public void disconnectDatabase() {
-        FirebaseDatabase.getInstance().goOffline();
-    }
-
-    /**
-     * Autentica un usuario.
+     * Da de alta un usuario en la plataforma.
      * @param email el email del usuario
-     * @param contrasenha la contrasenha del usuario
+     * @param password la contrasenha indicada por el usuario
      */
-    public void autenticarUsuario(String email, String contrasenha) {
-        mAuth = FirebaseAuth.getInstance();
-        mAuth.signInWithEmailAndPassword(email, contrasenha).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+    public void nuevoUsuario(String email, String password, String nombre, String apellidos,
+                             String nickname){
+        /* Guarda los datos del usuario en la base de datos */
+        String key = mDatabase.child(nickname).child("datos").push().getKey();
+        mDatabase.child(nickname).child("datos").child(key).setValue(new DatosUsuario(nombre, apellidos));
 
+        /* Registra al usuario en el servicio de autenticación de Firebase */
+        mAuth = FirebaseAuth.getInstance();
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     FirebaseUser user = mAuth.getCurrentUser();
-                    Toast.makeText(getApplicationContext(), "Autenticado con exito", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.putExtra("usuario", user);
+                    startActivity(intent);
+                    FirebaseDatabase.getInstance().goOffline();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Error al autenticar", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "ERROR: no pudo registrarse al usuario", Toast.LENGTH_SHORT).show();
                 }
             }
         });
