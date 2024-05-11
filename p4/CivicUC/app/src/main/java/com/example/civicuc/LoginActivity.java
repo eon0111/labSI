@@ -27,12 +27,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
 
-    /**
-     * Referencia a la base de datos de Firebase
-     */
+    /* Referencia a la base de datos de Firebase */
     private DatabaseReference mDatabase;
 
-    /** Referencia al servicio de autenticación de Firebase */
+    /* Referencia al servicio de autenticación de Firebase */
     private FirebaseAuth mAuth;
 
     @Override

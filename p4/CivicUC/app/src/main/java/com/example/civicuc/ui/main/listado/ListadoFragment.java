@@ -4,11 +4,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.civicuc.MainActivity;
 import com.example.civicuc.databinding.FragmentListadoBinding;
+import com.example.civicuc.ui.main.caida.UbicacionCaida;
+
+import java.util.ArrayList;
 
 public class ListadoFragment extends Fragment {
 
@@ -19,12 +24,12 @@ public class ListadoFragment extends Fragment {
 
         binding = FragmentListadoBinding.inflate(inflater, container, false);
 
-        /* Genera una lista con todas las caídas sin atender registradas en la bas de datos */
+        /* Genera una lista con todas las caídas sin atender registradas en la base de datos */
         // TODO:
-        /*
-        ListView listadoCaidas = binding.fragmentListadoCaidas;
-        ArrayList<UbicacionCaida> caidasBD = ((MainActivity)getActivity()).getmDatabase().getDatabase().
-        */
+
+        ListView listadoCaidasPendientes = binding.fragmentListadoCaidasPendientes;
+        ListView listadoCaidasAtendidas = binding.fragmentListadoCaidasAtendidas;
+        ArrayList<UbicacionCaida> caidasBD = ((MainActivity)getActivity()).getDatabase();
 
         return binding.getRoot();
     }
