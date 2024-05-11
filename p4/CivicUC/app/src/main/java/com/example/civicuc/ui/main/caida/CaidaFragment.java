@@ -210,7 +210,7 @@ public class CaidaFragment extends Fragment implements SensorEventListener, Loca
      * @param longitud el valor de longitud de su ubicación
      */
     public void writeNewUbicacion (String userId, String latitud, String longitud) {
-        UbicacionCaida ubicacion = new UbicacionCaida(latitud, longitud);
+        UbicacionCaida ubicacion = new UbicacionCaida(latitud, longitud, false);
         String key = ((MainActivity)getActivity()).getDatabase()
                                                   .child(userId)
                                                   .child("ubicaciones")

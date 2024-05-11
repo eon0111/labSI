@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.example.civicuc.MainActivity;
 import com.example.civicuc.databinding.FragmentListadoBinding;
 import com.example.civicuc.ui.main.caida.UbicacionCaida;
+import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
 
@@ -29,7 +30,7 @@ public class ListadoFragment extends Fragment {
 
         ListView listadoCaidasPendientes = binding.fragmentListadoCaidasPendientes;
         ListView listadoCaidasAtendidas = binding.fragmentListadoCaidasAtendidas;
-        ArrayList<UbicacionCaida> caidasBD = ((MainActivity)getActivity()).getDatabase();
+        //DataSnapshot data = ((MainActivity)getActivity()).getDatabase().get().getResult();
 
         return binding.getRoot();
     }

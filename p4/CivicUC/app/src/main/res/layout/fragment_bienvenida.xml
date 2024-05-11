@@ -71,13 +71,14 @@
     <Button
         android:id="@+id/fragment_bienvenida_boton_login"
         android:layout_width="270dp"
-        android:layout_height="70dp"
+        android:layout_height="55dp"
 
         android:text="Login"
         android:fontFamily="sans-serif"
         android:textAllCaps="false"
         android:textSize="10pt"
-        android:background="@drawable/boton_redondeado"
+        android:background="@drawable/boton_login"
+        android:textStyle="bold"
 
         app:layout_constraintTop_toBottomOf="@id/fragment_bienvenida_mensaje_bienvenida_contenido"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,14 +88,15 @@
     <Button
         android:id="@+id/fragment_bienvenida_boton_registro"
         android:layout_width="270dp"
-        android:layout_height="70dp"
+        android:layout_height="55dp"
 
         android:text="Registro"
         android:fontFamily="sans-serif"
         android:textAllCaps="false"
         android:textSize="10pt"
-        android:background="@drawable/boton_redondeado"
-        android:backgroundTint="@color/white"
+        android:background="@drawable/boton_registro"
+        android:textColor="@color/unican"
+        android:textStyle="bold"
 
         app:layout_constraintTop_toBottomOf="@id/fragment_bienvenida_boton_login"
         app:layout_constraintStart_toStartOf="parent"

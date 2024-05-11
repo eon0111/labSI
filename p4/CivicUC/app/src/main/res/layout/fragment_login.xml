@@ -95,7 +95,7 @@
         android:layout_width="100dp"
         android:layout_height="50dp"
 
-        android:background="@drawable/boton_redondeado"
+        android:background="@drawable/boton_login"
         android:fontFamily="sans-serif"
         android:text="Login"
         android:textAllCaps="false"

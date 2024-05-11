@@ -69,8 +69,7 @@ public class LoginActivity extends AppCompatActivity {
     public void nuevoUsuario(String email, String password, String nombre, String apellidos,
                              String nickname){
         /* Guarda los datos del usuario en la base de datos */
-        String key = mDatabase.child(nickname).child("datos").push().getKey();
-        mDatabase.child(nickname).child("datos").child(key).setValue(new DatosUsuario(nombre, apellidos));
+        mDatabase.child(mAuth.getCurrentUser().getEmail()).child("datos").setValue(new DatosUsuario(nombre, apellidos));
 
         /* Registra al usuario en el servicio de autenticación de Firebase */
         mAuth = FirebaseAuth.getInstance();
