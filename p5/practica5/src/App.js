@@ -5,7 +5,7 @@ import Autor from './Autor';
 
 const hennesy = {
   nombre: 'John L. Hennessy',
-  foto: {fotoHennessy},
+  foto: fotoHennessy,
   nacimiento: '22 de septiembre de 1952 en Huntington, Nueva York, EE. UU.',
   educacion:  ['Licenciatura en Ingeniería Eléctrica, 1973 - Universidad Villanova.',
               'Maestría en Ciencias en Ingeniería Eléctrica, 1975 - Universidad de Stanford.',
@@ -25,7 +25,7 @@ const hennesy = {
 
 const patterson = {
   nombre: 'David Patterson',
-  foto: {fotoPatterson},
+  foto: fotoPatterson,
   nacimiento: '16 de noviembre de 1947 en Evergreen Park, Illinois, EE. UU.',
   educacion:  ['Licenciatura en Ciencias en Física, 1969 - Universidad de California, Los Ángeles.',
               'Maestría en Ciencias en Informática, 1977 - Universidad de California, Berkeley.',
@@ -45,13 +45,13 @@ const patterson = {
 
 function App() {
   return (
-    <>
+    <div style={{paddingLeft: 20, backgroundColor: "#FDEFE2"}}>
       <h1>Autores de la práctica</h1>
       <Autor person={{nombre: hennesy.nombre, foto: hennesy.foto, nacimiento: hennesy.nacimiento, educacion: hennesy.educacion, 
         carrera: hennesy.carrera, contribuciones: hennesy.contribuciones, premios: hennesy.premios, bibliografia: hennesy.bibliografia}}/>
       <Autor person={{nombre: patterson.nombre, foto: patterson.foto, nacimiento: patterson.nacimiento, educacion: patterson.educacion,
         carrera: patterson.carrera, contribuciones: patterson.contribuciones, premios: patterson.premios, bibliografia: patterson.bibliografia}}/>
-    </>
+    </div>
   );
 }
 

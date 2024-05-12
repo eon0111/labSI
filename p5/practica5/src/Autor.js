@@ -5,8 +5,9 @@ function Imagen ({person}) {
             src={person.foto}
             alt={'Foto de ' + person.nombre}
             style={{
-              width: 90,
-              height: 90
+              width: 120,
+              height: 120,
+              paddingLeft: 20
             }}
         />
     );
@@ -20,12 +21,12 @@ function Lista ({person}) {
     var bibliografia = person.bibliografia.map(bib => <li className="item"> {bib} </li>);
     return (
         <>
-        <ul> {person.nacimiento} </ul>
-        <ul> {educacion} </ul>
-        <ul> {carrera} </ul>
-        <ul> {contribuciones} </ul>
-        <ul> {premios} </ul>
-        <ul> {bibliografia} </ul>
+        <ul> <strong>Nacimiento:</strong> <li className="item">{person.nacimiento}</li> </ul>
+        <ul> <strong>Educacion:</strong> {educacion} </ul>
+        <ul> <strong>Carrera:</strong> {carrera} </ul>
+        <ul> <strong>Contribuciones:</strong> {contribuciones} </ul>
+        <ul> <strong>Premios:</strong> {premios} </ul>
+        <ul> <strong>Bibliografia:</strong> {bibliografia} </ul>
         </>
     );
 }
