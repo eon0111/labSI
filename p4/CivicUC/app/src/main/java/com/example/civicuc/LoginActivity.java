@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.example.civicuc.ui.acceso.registro.DatosUsuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -66,20 +65,16 @@ public class LoginActivity extends AppCompatActivity {
      * @param email el email del usuario
      * @param password la contrasenha indicada por el usuario
      */
-    public void nuevoUsuario(String email, String password, String nombre, String apellidos,
-                             String nickname){
-        /* Guarda los datos del usuario en la base de datos */
-        mDatabase.child(mAuth.getCurrentUser().getEmail()).child("datos").setValue(new DatosUsuario(nombre, apellidos));
-
+    public void nuevoUsuario(String email, String password){
         /* Registra al usuario en el servicio de autenticación de Firebase */
         mAuth = FirebaseAuth.getInstance();
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    FirebaseUser user = mAuth.getCurrentUser();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.putExtra("usuario", user);
+                    intent.putExtra("email", email);
+                    intent.putExtra("contrasenha", password);
                     startActivity(intent);
                     FirebaseDatabase.getInstance().goOffline();
                 } else {

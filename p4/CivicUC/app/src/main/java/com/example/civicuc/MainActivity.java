@@ -1,9 +1,15 @@
 package com.example.civicuc;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
+import com.example.civicuc.ui.main.caida.UbicacionCaida;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -11,6 +17,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.civicuc.databinding.ActivityMainBinding;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -22,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
      * Referencia a la base de datos de Firebase
      */
     private DatabaseReference mDatabase;
+
+    /**
+     * Referencia al gestor de autenticación
+     */
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +55,13 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         /* Conexión a la base de datos */
+        FirebaseDatabase.getInstance().goOnline();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        /* Conexión al gestor de autenticación */
+        mAuth = FirebaseAuth.getInstance();
+        mAuth.signInWithEmailAndPassword(getIntent().getStringExtra("email"),
+                                         getIntent().getStringExtra("contrasenha"));
     }
 
     /**
@@ -51,6 +70,27 @@ public class MainActivity extends AppCompatActivity {
      */
     public DatabaseReference getDatabase() {
         return mDatabase;
+    }
+
+    /**
+     * Registra una nueva caída en la base de datos.
+     * @param latitud el valor de latitud de su ubicación
+     * @param longitud el valor de longitud de su ubicación
+     */
+    public void writeNewUbicacion (String latitud, String longitud) {
+        UbicacionCaida ubicacion = new UbicacionCaida(latitud, longitud);
+        String key = mDatabase.child("pendientes")
+                              .push()
+                              .getKey();
+        //Toast.makeText(this, key, Toast.LENGTH_LONG).show();
+        mDatabase.child("pendientes")
+                 .child(key)
+                 .setValue(ubicacion).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(), "FALLO", Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
 }

@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -135,9 +136,10 @@ public class CaidaFragment extends Fragment implements SensorEventListener, Loca
                 crearNotificacion();
 
                 /* Registra la caída en la base de datos */
-                writeNewUbicacion(FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),
-                                  binding.caidasLatitudUsuario.getText().toString(),
-                                  binding.caidasLongitudUsuario.getText().toString());
+                ((MainActivity)getActivity()).writeNewUbicacion(binding.caidasLatitudUsuario
+                                                                .getText().toString(),
+                                                                binding.caidasLongitudUsuario
+                                                                .getText().toString());
             }
         }
     }
@@ -201,25 +203,6 @@ public class CaidaFragment extends Fragment implements SensorEventListener, Loca
 
         /* Muestra la notificación */
         notificationManager.notify(96, builder.build());
-    }
-
-    /**
-     * Registra una nueva caída en la base de datos.
-     * @param userId el ID del usuario accidentado
-     * @param latitud el valor de latitud de su ubicación
-     * @param longitud el valor de longitud de su ubicación
-     */
-    public void writeNewUbicacion (String userId, String latitud, String longitud) {
-        UbicacionCaida ubicacion = new UbicacionCaida(latitud, longitud, false);
-        String key = ((MainActivity)getActivity()).getDatabase()
-                                                  .child(userId)
-                                                  .child("ubicaciones")
-                                                  .push().getKey();
-        ((MainActivity)getActivity()).getDatabase()
-                                     .child(userId)
-                                     .child("ubicaciones")
-                                     .child(key)
-                                     .setValue(ubicacion);
     }
 
     @Override

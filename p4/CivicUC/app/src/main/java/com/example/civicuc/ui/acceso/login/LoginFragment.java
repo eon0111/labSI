@@ -71,10 +71,15 @@ public class LoginFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        FirebaseUser user = mAuth.getCurrentUser();
                         Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
-                        intent.putExtra("usuario", user);
+
+                        /* Le pasa el usuario y la contrasenha a la activida principal para loggear
+                         * desde ahí al usuario y que pueda operar con la BD */
+                        intent.putExtra("email", binding.fragmentLoginInputEmail.getText().toString());
+                        intent.putExtra("contrasenha", binding.fragmentLoginInputContrasenha.getText().toString());
                         startActivity(intent);
+
+                        /* Se desconecta de la BD para reconectarse desde la actividad princpal */
                         FirebaseDatabase.getInstance().goOffline();
                     } else {
                         binding.fragmentLoginTextoErrLogin.setVisibility(View.VISIBLE);

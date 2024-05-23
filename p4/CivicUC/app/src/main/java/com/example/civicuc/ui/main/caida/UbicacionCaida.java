@@ -11,14 +11,12 @@ public class UbicacionCaida {
     private String latitud;
     private String longitud;
     private String instante;
-    private boolean atendida;
 
     public UbicacionCaida() { }
 
-    public UbicacionCaida(String latitud, String longitud, boolean atendida) {
+    public UbicacionCaida(String latitud, String longitud) {
         this.latitud = latitud;
         this.longitud = longitud;
-        this.atendida = atendida;
         this.instante = LocalDateTime.now().toString();
     }
 
@@ -46,19 +44,9 @@ public class UbicacionCaida {
         this.instante = instante;
     }
 
-    public boolean isAtendida() {
-        return atendida;
-    }
-
-    public void setAtendida(boolean atendida) {
-        this.atendida = atendida;
-    }
-
     @NonNull
     public String toString() {
-        return "Latitud: " + this.latitud +
-                "\nLongitud: " + this.longitud +
-                "\nInstante: " + this.instante +
-                "\nAtendida: " + ((atendida) ? "si" : "no");
+        return "Latitud: " + this.latitud + "\nLongitud: " + this.longitud + "\nInstante: " + this.instante;
     }
+
 }

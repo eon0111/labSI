@@ -35,14 +35,20 @@ public class RegistroFragment extends Fragment {
         binding.fragmentRegistroBoton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /* Se da de alta al usuario en el servicio de autenticación de Firebase y arranca
-                 * la actividad principal */
-                ((LoginActivity)getActivity()).nuevoUsuario(
-                        binding.fragmentRegistroEmail.getText().toString(),
-                        binding.fragmentRegistroContrasenha.getText().toString(),
-                        binding.fragmentRegistroNombre.getText().toString(),
-                        binding.fragmentRegistroApellidos.getText().toString(),
-                        binding.fragmentRegistroNickname.getText().toString());
+                if (binding.fragmentRegistroContrasenha
+                           .getText().toString()
+                           .equals(binding.fragmentRegistroRepiteContrasenha
+                                          .getText().toString())) {
+                    binding.fragmentRegistroErrorContrasenha.setVisibility(View.INVISIBLE);
+
+                    /* Se da de alta al usuario en el servicio de autenticación de Firebase y arranca
+                     * la actividad principal */
+                    ((LoginActivity) getActivity()).nuevoUsuario(
+                            binding.fragmentRegistroEmail.getText().toString(),
+                            binding.fragmentRegistroContrasenha.getText().toString());
+                } else {
+                    binding.fragmentRegistroErrorContrasenha.setVisibility(View.VISIBLE);
+                }
             }
         });
 
