@@ -30,9 +30,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="5dp"
-            android:listSelector="@color/unican_transparente"
             android:headerDividersEnabled="true"
-            android:dividerHeight="3dp"/>
+            android:dividerHeight="3dp"
+            android:background="@drawable/contorno_listado"/>
     </LinearLayout>
 
     <Button
@@ -74,7 +74,10 @@
             android:id="@+id/fragment_listado_caidas_atendidas"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="5dp"/>
+            android:paddingTop="5dp"
+            android:headerDividersEnabled="true"
+            android:dividerHeight="3dp"
+            android:background="@drawable/contorno_listado"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
