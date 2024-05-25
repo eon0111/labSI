@@ -139,7 +139,8 @@ public class CaidaFragment extends Fragment implements SensorEventListener, Loca
                 ((MainActivity)getActivity()).writeNewUbicacion(binding.caidasLatitudUsuario
                                                                 .getText().toString(),
                                                                 binding.caidasLongitudUsuario
-                                                                .getText().toString());
+                                                                .getText().toString(),
+                                                                ((MainActivity)getActivity()).getEmailUsuario());
             }
         }
     }

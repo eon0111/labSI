@@ -5,6 +5,7 @@
     <string name="title_caida">Alerta</string>
     <string name="title_listado">Caídas</string>
     <string name="title_chat">Chat</string>
+    <string name="title_ar">AR</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_bienvenida">Bienvenid@</string>
     <string name="title_login">Login</string>

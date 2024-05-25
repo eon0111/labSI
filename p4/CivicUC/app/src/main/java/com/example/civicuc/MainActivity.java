@@ -73,24 +73,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Retorna el email del usuario.
+     * @return el email del usuario
+     */
+    public String getEmailUsuario() { return mAuth.getCurrentUser().getEmail(); }
+
+    /**
      * Registra una nueva caída en la base de datos.
      * @param latitud el valor de latitud de su ubicación
      * @param longitud el valor de longitud de su ubicación
      */
-    public void writeNewUbicacion (String latitud, String longitud) {
-        UbicacionCaida ubicacion = new UbicacionCaida(latitud, longitud);
+    public void writeNewUbicacion (String latitud, String longitud, String email) {
+        UbicacionCaida ubicacion = new UbicacionCaida(latitud, longitud, email);
         String key = mDatabase.child("pendientes")
                               .push()
                               .getKey();
-        //Toast.makeText(this, key, Toast.LENGTH_LONG).show();
         mDatabase.child("pendientes")
                  .child(key)
-                 .setValue(ubicacion).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(), "FALLO", Toast.LENGTH_LONG).show();
-                    }
-                });
+                 .setValue(ubicacion);
     }
 
 }

@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.listado.ListadoFragment"
-    android:layout_marginBottom="?android:attr/actionBarSize">
+    tools:context=".ui.main.listado.ListadoFragment">
 
     <LinearLayout
         android:id="@+id/fragment_listado_layout_caidas_pendientes"
         android:layout_width="330dp"
-        android:layout_height="250dp"
+        android:layout_height="290dp"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,25 +20,25 @@
             android:id="@+id/fragment_listado_titulo_pendientes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
+            android:paddingLeft="7dp"
+            android:paddingTop="4dp"
             android:text="Caídas pendientes"
             android:textStyle="bold"
             android:textColor="@color/unican"/>
-        <ScrollView
-            android:id="@+id/fragment_listado_pendientes_scrollView"
+        <ListView
+            android:id="@+id/fragment_listado_caidas_pendientes"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <ListView
-                android:id="@+id/fragment_listado_caidas_pendientes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </ScrollView>
+            android:layout_height="match_parent"
+            android:paddingTop="5dp"
+            android:listSelector="@color/unican_transparente"
+            android:headerDividersEnabled="true"
+            android:dividerHeight="3dp"/>
     </LinearLayout>
 
     <Button
         android:id="@+id/fragment_listado_boton"
         android:layout_width="200dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_listado_layout_caidas_pendientes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +46,7 @@
 
         android:text="Atender caída"
         android:textAllCaps="false"
-        android:textSize="7pt"
+        android:textSize="9pt"
         android:textStyle="bold"
 
         android:background="@drawable/boton_login"/>
@@ -55,7 +54,7 @@
     <LinearLayout
         android:id="@+id/fragment_listado_layout_caidas_atendidas"
         android:layout_width="330dp"
-        android:layout_height="250dp"
+        android:layout_height="290dp"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/fragment_listado_boton"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,19 +65,16 @@
             android:id="@+id/fragment_listado_titulo_atendidas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
+            android:paddingLeft="7dp"
+            android:paddingTop="4dp"
             android:text="Caídas atendidas"
             android:textStyle="bold"
             android:textColor="@color/unican"/>
-        <ScrollView
-            android:id="@+id/fragment_listado_atendidas_scrollView"
+        <ListView
+            android:id="@+id/fragment_listado_caidas_atendidas"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <ListView
-                android:id="@+id/fragment_listado_caidas_atendidas"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </ScrollView>
+            android:layout_height="match_parent"
+            android:paddingTop="5dp"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

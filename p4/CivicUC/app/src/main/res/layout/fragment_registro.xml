@@ -111,13 +111,15 @@
 
     <Button
         android:id="@+id/fragment_registro_boton"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
         android:background="@drawable/boton_login"
         android:fontFamily="sans-serif"
         android:text="Registro"
         android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textSize="7pt"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
