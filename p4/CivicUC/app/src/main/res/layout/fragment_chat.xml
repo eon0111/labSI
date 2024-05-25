@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.chat.ChatFragment"
-    android:layout_marginBottom="?android:attr/actionBarSize">
+    tools:context=".ui.main.chat.ChatFragment">
 
     <ScrollView
         android:id="@+id/fragment_chat_linear_layout"
-        android:layout_width="380dp"
-        android:layout_height="520dp"
+        android:layout_width="360dp"
+        android:layout_height="610dp"
 
         android:background="@drawable/contorno_listado"
 
@@ -27,7 +26,7 @@
 
     <EditText
         android:id="@+id/fragment_chat_input_mensaje"
-        android:layout_width="325dp"
+        android:layout_width="285dp"
         android:layout_height="40dp"
 
         android:background="@drawable/contorno_listado"
@@ -39,10 +38,12 @@
 
     <Button
         android:id="@+id/fragment_chat_boton_enviar"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
 
-        android:background="@drawable/boton_enviar"
+        android:text="S"
+        android:textStyle="bold"
+        android:textSize="10pt"
 
         app:layout_constraintTop_toTopOf="@id/fragment_chat_input_mensaje"
         app:layout_constraintStart_toEndOf="@id/fragment_chat_input_mensaje"

@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:id="@+id/fragment_listado_layout_caidas_pendientes"
-        android:layout_width="330dp"
+        android:layout_width="360dp"
         android:layout_height="290dp"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
@@ -53,7 +53,7 @@
 
     <LinearLayout
         android:id="@+id/fragment_listado_layout_caidas_atendidas"
-        android:layout_width="330dp"
+        android:layout_width="360dp"
         android:layout_height="290dp"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/fragment_listado_boton"

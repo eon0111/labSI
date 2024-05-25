@@ -67,11 +67,8 @@ public class ListadoFragment extends Fragment {
                     }
                 }
             }
-
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) { }
         });
 
         // Obtiene todas las caídas registradas como atendidas y genera el listado en la vista
@@ -86,11 +83,8 @@ public class ListadoFragment extends Fragment {
                     }
                 }
             }
-
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) { }
         });
 
         // Configura el oyente del nodo de caídas pendientes
@@ -106,17 +100,30 @@ public class ListadoFragment extends Fragment {
                 adaptador_pendientes.notifyDataSetChanged();
             }
             @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) { }
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) { }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
 
+        });
+
+        // Configura el oyente del nodo de caídas atendidas
+        ((MainActivity) getActivity()).getDatabase().child("atendidas").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) { }
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                caidasAtendidas.put(snapshot.getKey(), snapshot.getValue(UbicacionCaida.class));
+                caidasAtendidasStrings.add(snapshot.getKey());
+                adaptador_atendidas.notifyDataSetChanged();
             }
             @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) { }
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) { }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
 
         });
 
