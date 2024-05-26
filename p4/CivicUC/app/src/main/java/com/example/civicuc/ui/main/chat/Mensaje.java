@@ -1,14 +1,17 @@
 package com.example.civicuc.ui.main.chat;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Mensaje {
 
     private String emisor;
     private String contenido;
-    private Date momento;
+    private String momento;
 
-    public Mensaje(String emisor, String contenido, Date momento) {
+    public Mensaje() { }
+
+    public Mensaje(String emisor, String contenido, String momento) {
         this.emisor = emisor;
         this.contenido = contenido;
         this.momento = momento;
@@ -30,11 +33,21 @@ public class Mensaje {
         this.contenido = contenido;
     }
 
-    public Date getMomento() {
+    public String getMomento() {
         return momento;
     }
 
-    public void setMomento(Date momento) {
+    public void setMomento(String momento) {
         this.momento = momento;
+    }
+
+    @Override
+    public String toString() {
+        LocalDateTime momentoParseado = LocalDateTime.parse(this.momento);
+        int hora = momentoParseado.getHour();
+        return emisor + "\n"
+               + contenido + "\n"
+               + ((hora < 10) ? "0" : "") + hora + ":"
+               + momentoParseado.getMinute();
     }
 }

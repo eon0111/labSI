@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.chat.ChatFragment">
 
-    <ScrollView
+    <LinearLayout
         android:id="@+id/fragment_chat_linear_layout"
         android:layout_width="360dp"
         android:layout_height="610dp"
@@ -22,7 +22,7 @@
             android:id="@+id/fragment_chat_historico_mensajes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-    </ScrollView>
+    </LinearLayout>
 
     <EditText
         android:id="@+id/fragment_chat_input_mensaje"

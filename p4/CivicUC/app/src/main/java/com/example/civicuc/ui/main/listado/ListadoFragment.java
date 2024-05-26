@@ -90,13 +90,11 @@ public class ListadoFragment extends Fragment {
         // Configura el oyente del nodo de caídas pendientes
         ((MainActivity) getActivity()).getDatabase().child("pendientes").addChildEventListener(new ChildEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) { }
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 caidasPendientes.put(snapshot.getKey(), snapshot.getValue(UbicacionCaida.class));
-                caidasPendientesStrings.add(snapshot.getKey());
+                caidasPendientesStrings.add(snapshot.getValue(UbicacionCaida.class).toString());
                 adaptador_pendientes.notifyDataSetChanged();
             }
             @Override
@@ -105,7 +103,6 @@ public class ListadoFragment extends Fragment {
             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) { }
             @Override
             public void onCancelled(@NonNull DatabaseError error) { }
-
         });
 
         // Configura el oyente del nodo de caídas atendidas
@@ -115,7 +112,7 @@ public class ListadoFragment extends Fragment {
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 caidasAtendidas.put(snapshot.getKey(), snapshot.getValue(UbicacionCaida.class));
-                caidasAtendidasStrings.add(snapshot.getKey());
+                caidasAtendidasStrings.add(snapshot.getValue(UbicacionCaida.class).toString());
                 adaptador_atendidas.notifyDataSetChanged();
             }
             @Override

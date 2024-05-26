@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class ChatAdapter extends ArrayAdapter<Mensaje> {
 
     public ChatAdapter(Context context, ArrayList<Mensaje> users) {
-        super(context, 0, users);
+        super(context, R.layout.item_chat, users);
     }
 
     @Override
@@ -24,8 +24,8 @@ public class ChatAdapter extends ArrayAdapter<Mensaje> {
         Mensaje mensaje = getItem(position);
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_chat, parent,false);
-            Toast.makeText(getContext(),parent.getId()+"",Toast.LENGTH_LONG).show();
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_chat, parent, false);
+            Toast.makeText(getContext(), parent.getId() + "", Toast.LENGTH_LONG).show();
         }
 
         TextView tvEmisor = (TextView) convertView.findViewById(R.id.tvEmisor);
@@ -33,7 +33,7 @@ public class ChatAdapter extends ArrayAdapter<Mensaje> {
         TextView tvFecha = (TextView) convertView.findViewById(R.id.tvMomento);
         tvEmisor.setText(mensaje.getEmisor());
         tvContenido.setText(mensaje.getContenido());
-        tvFecha.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)", mensaje.getMomento()));
+        tvFecha.setText(mensaje.getMomento());
 
         return convertView;
     }
