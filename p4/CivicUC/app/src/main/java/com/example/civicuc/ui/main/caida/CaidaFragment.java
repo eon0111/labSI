@@ -20,7 +20,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -28,10 +27,9 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
-import com.example.civicuc.MainActivity;
+import com.example.civicuc.ui.main.MainActivity;
 import com.example.civicuc.R;
 import com.example.civicuc.databinding.FragmentCaidaBinding;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class CaidaFragment extends Fragment implements SensorEventListener, LocationListener {
 

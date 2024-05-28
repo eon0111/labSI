@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.acceso.registro.RegistroFragment">
+    tools:context=".ui.acceso.RegistroFragment">
 
     <ImageView
         android:id="@+id/fragment_registro_logo_app"

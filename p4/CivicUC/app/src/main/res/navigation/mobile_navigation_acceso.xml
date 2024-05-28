@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_bienvenida"
-        android:name="com.example.civicuc.ui.acceso.bienvenida.BienvenidaFragment"
+        android:name="com.example.civicuc.ui.acceso.BienvenidaFragment"
         android:label="@string/title_bienvenida"
         tools:layout="@layout/fragment_bienvenida" />
 
     <fragment
         android:id="@+id/navigation_login"
-        android:name="com.example.civicuc.ui.acceso.login.LoginFragment"
+        android:name="com.example.civicuc.ui.acceso.LoginFragment"
         android:label="@string/title_login"
         tools:layout="@layout/fragment_login" />
 
     <fragment
         android:id="@+id/navigation_registro"
-        android:name="com.example.civicuc.ui.acceso.registro.RegistroFragment"
+        android:name="com.example.civicuc.ui.acceso.RegistroFragment"
         android:label="@string/title_registro"
         tools:layout="@layout/fragment_registro" />
 
